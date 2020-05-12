@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: weixin
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: 225588
+      url: jdbc:mysql://47.97.186.90:3306/wechat_sex?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true&useAffectedRows=true
+  redis:
+    database: 2
+    host: 47.97.186.90
+    port: 6379
+    password: chenqiting
+
+mybatis:
+  configuration:
+    use-generated-keys: true
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/*.xml
+
+#自动文件路径
+file:
+  uploadPath: /home
+  prefixURL: http://47.97.186.90
+
+security:
+  jwtDefaultExp: 1296000
