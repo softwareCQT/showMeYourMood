@@ -30,7 +30,7 @@ public class JwtUtil {
         algorithm = Algorithm.RSA256(publicKey, privateKey);
     }
 
-    public String createToken(String userName, String userId) {
+    public String createToken(String userName, Integer userId) {
         String token;
         try {
             token = JWT

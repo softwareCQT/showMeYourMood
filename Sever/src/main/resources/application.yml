@@ -12,6 +12,12 @@ spring:
     host: 47.97.186.90
     port: 6379
     password: chenqiting
+  mail:
+    host: smtp.qq.com
+    port: 25
+    username: 1179374184@qq.com
+    password: kbtphmwneiyrhahj
+    default-encoding: utf-8
 
 mybatis:
   configuration:
