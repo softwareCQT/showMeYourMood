@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct NoteList: View {
+struct NoteListView: View {
     var body: some View {
         // 这里字体看着改
         NavigationView {
@@ -34,6 +34,6 @@ struct NoteList: View {
 
 struct NoteList_Previews: PreviewProvider {
     static var previews: some View {
-        NoteList()
+        NoteListView()
     }
 }
