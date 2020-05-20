@@ -6,12 +6,18 @@ spring:
       driver-class-name: com.mysql.cj.jdbc.Driver
       username: root
       password: 225588
-      url: jdbc:mysql://47.97.186.90:3306/wechat_sex?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true&useAffectedRows=true
+      url: jdbc:mysql://47.97.186.90:3306/memory?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true&useAffectedRows=true
   redis:
-    database: 2
+    database: 1
     host: 47.97.186.90
     port: 6379
     password: chenqiting
+  mail:
+    host: smtp.qq.com
+    port: 25
+    username: 1179374184@qq.com
+    password: kbtphmwneiyrhahj
+    default-encoding: utf-8
 
 mybatis:
   configuration:
@@ -19,10 +25,6 @@ mybatis:
     map-underscore-to-camel-case: true
   mapper-locations: classpath:mapper/*.xml
 
-#自动文件路径
-file:
-  uploadPath: /home
-  prefixURL: http://47.97.186.90
 
 security:
   jwtDefaultExp: 1296000
