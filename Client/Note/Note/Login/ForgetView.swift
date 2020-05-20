@@ -7,9 +7,11 @@
 //
 
 import SwiftUI
+import Alamofire
 
 struct ForgetView: View {
     @State var userMail = ""
+    @State var userPwd = ""
     @State var verifyCode = ""
     @State var isShowing = false
     @State var isSending = false
@@ -33,13 +35,32 @@ struct ForgetView: View {
                                           height: 40,placeholder: "请输入注册时使用的邮箱号")
                         }
                         
-                        SendVerifyCodeView(verifyCode: self.$verifyCode, isSending: self.$isSending, waitingTime: self.$waitingTime)
+                        HStack {
+                            Text("密码")
+                            UserSecureField(loginInfo: self.$userPwd,height: 40, placeholder: "请输入密码")
+                        }
                         
+                        SendVerifyCodeView(verifyCode: self.$verifyCode, isSending: self.$isSending, waitingTime: self.$waitingTime, userMail: self.userMail, request: AF.request(baseURL + passwordCodeURL, parameters: ["email" : self.userMail]))
                     }
-                    LoadingButton(success: self.$findSuccess, error: self.$findError, isShowing: self.$isShowing, request: {
-                        self.userMail == "123456" && self.verifyCode == "123456" ? true : false
-                        }, message: "邮箱或验证码不正确！")
-                        
+                    
+                    LoadingButton(success: self.$findSuccess,
+                                  error: self.$findError,
+                                  isShowing: self.$isShowing,
+                                  
+                                  request: AF.request(baseURL + updatePasswordURL,
+                                   method: .post,
+                                   parameters: ["email": self.userMail, "password": self.userPwd],
+                                   encoder: JSONParameterEncoder.default),
+                                  
+                                  preRequest: AF.request(baseURL + validURL, parameters: ["email": self.userMail, "code": self.verifyCode]),
+                                  successMsg: "注册成功！",
+                                  title: "注册",
+                                  vertifyBlock: {
+                                    if self.verifyCode == "" { return (false, "验证码不可为空！")}
+                                    if  self.userPwd == "" || self.userMail == "" { return (false, "输入不可为空！")}
+                                    // 验证验证码
+                                    return (true, nil)
+                    })
                 }
                 Spacer()
             }.padding()
