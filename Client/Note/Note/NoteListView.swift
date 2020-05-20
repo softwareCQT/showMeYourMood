@@ -8,30 +8,58 @@
 
 import SwiftUI
 
-struct NoteListView: View {
-    var body: some View {
-        // 这里字体看着改
-        NavigationView {
 
-            List(/*@START_MENU_TOKEN@*/0 ..< 5/*@END_MENU_TOKEN@*/) { item in
-                    
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("2019年4月5日")
-                        Text("笔记标题")
-                            .font(.system(size: 25))
-                        
-                        Text("笔记副标题")
-                            .font(.subheadline).foregroundColor(.secondary)
+struct NoteListView: View {
+    @ObservedObject var noteStore = NoteStore()
+    @State var showProfile = true
+    
+    func move(from source: IndexSet, to destination: Int) {
+        noteStore.notes.move(fromOffsets: source, toOffset: destination)
+    }
+    
+    var body: some View {
+        ZStack {
+            NavigationView {
+                List {
+                    ForEach(noteStore.notes) { note in
+                        NavigationLink(destination:
+                        Text("dasda")) {
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text(note.title)
+                                    .font(.system(size: 25))
+                                Text(note.date)
+                                Text(note.subtitle)
+                                    .font(.subheadline).foregroundColor(.secondary)
+                            }
+                        }
+                    }.onDelete { index in
+                        for i in index {
+                            self.noteStore.notes.remove(at: i)
+                        }
                     }
-                
-            }.navigationBarTitle("我的日记")
-            
+                    .onMove(perform: move)
+                }.navigationBarTitle("我的日记")
+                    .navigationBarItems(
+                        leading: Button(action: {
+                            self.showProfile.toggle()
+                        }) {
+                            Image(systemName: "square.grid.2x2")
+                                .renderingMode(.original)
+                        },
+                        trailing: EditButton()
+                )
+            }
+            BlurView(style: .regular)
+                .offset(x: 0, y: showProfile ? 0 : UIScreen.main.bounds.height)
+                .onTapGesture {
+                    self.showProfile.toggle()
+            }
+            MenuView()
+                .offset(x: 0, y: showProfile ? 0 : UIScreen.main.bounds.height)
+                .animation(.spring())
         }
-        
-        
     }
 }
-
 struct NoteList_Previews: PreviewProvider {
     static var previews: some View {
         NoteListView()

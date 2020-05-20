@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Alamofire
 
 struct LoginView: View {
     @State var userMail = ""
@@ -17,6 +18,11 @@ struct LoginView: View {
     @State var pushLogon = false
     @State var pushForget = false
     @ObservedObject var keyboardResponder = KeyboardResponder()
+    func login() {
+        DispatchQueue.main.async {
+            AppWindow!.rootViewController = UIHostingController(rootView: NoteListView())
+        }
+    }
     
     var body: some View {
         LoadingView(isShowing: $isShowing) {
@@ -30,7 +36,9 @@ struct LoginView: View {
                     VStack(alignment:.trailing, spacing: 21) {
                         // 输入框
                         UserTextField(loginInfo: self.$userMail, placeholder: "请输入邮箱")
-                        UserTextField(loginInfo: self.$userPwd, placeholder: "请输入密码")
+                        UserSecureField(loginInfo: self.$userPwd, placeholder: "请输入密码")
+                        
+                        
                         Button("忘记密码?") {
                             self.pushForget.toggle()
                         }.sheet(isPresented: self.$pushForget, content: {
@@ -39,10 +47,14 @@ struct LoginView: View {
                     }.frame(width: 300)
                     
                     VStack(spacing: 21) {
-                        LoadingButton(success: self.$loginSuccess, error: self.$loginError, isShowing: self.$isShowing, request: {
-                        self.userMail == "123456" && self.userPwd == "123456" ? true : false
-                        }, message: "邮箱或验证码不正确！", title: "登录")
-                        
+                        LoadingButton(success: self.$loginSuccess, error: self.$loginError, isShowing: self.$isShowing, request:
+                            AF.request(baseURL + loginURL, method: .post, parameters: ["email": self.userMail, "password": self.userPwd], encoder: JSONParameterEncoder.default),
+                        title: "登录", showSuccess: false, vertifyBlock: {
+                            if  self.userPwd == "" || self.userMail == "" { return (false, "输入不可为空！")}
+                            return (true, nil)
+                        }, passBlock: {
+                            self.login()
+                        })
                         
                         Button("注册") {
                             self.pushLogon.toggle()
@@ -71,6 +83,24 @@ struct UserTextField: View {
         HStack {
             TextField(placeholder, text:$loginInfo)
                 .frame(height: height)
+        }.padding(.leading, 10)
+            .overlay(
+                RoundedRectangle(cornerRadius: 4)
+                    .stroke(lineWidth: 2)
+                    .foregroundColor(Color("lineColor"))
+        )
+    }
+}
+// 用户名输入框 用户密码输入框
+struct UserSecureField: View {
+    @Binding var loginInfo : String
+    var height: CGFloat = 42
+    let placeholder : String
+    var body: some View {
+        HStack {
+            SecureField(placeholder, text:$loginInfo)
+                .frame(height: height)
+            
         }.padding(.leading, 10)
             .overlay(
                 RoundedRectangle(cornerRadius: 4)
