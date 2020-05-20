@@ -52,7 +52,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         boolean flag = passwordEncoder.matches(userLoginBo.getPassword(), user.getPassword());
         //密码是否成功
         if (flag) {
-            String token = jwtUtil.createToken(null, user.getUserId());
+            String token = jwtUtil.createToken(user.getUserId().toString(), user.getUserId());
             return new Result<>(token);
         }else {
             return ResultConstant.USER_ERROR;

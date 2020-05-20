@@ -34,7 +34,7 @@ public class UserController {
         return userService.register(user);
     }
     @GetMapping("/api/user/code/valid")
-    public Result userMatches(@Valid @Email(message = "邮箱格式") String email, @Valid @Pattern(regexp = "[0-9]?") String code) {
+    public Result userMatches(@RequestParam("email") @Valid @Email(message = "邮箱格式") String email, @RequestParam("code")@Valid @Pattern(regexp = "[0-9]*") String code) {
         return userService.matchesCode(email,code);
     }
 

@@ -54,8 +54,9 @@ public class CustomerFilter extends BasicAuthenticationFilter {
                     SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
                     chain.doFilter(request, response);
                 }
+        }else {
+            ErrorHandlerUtil.printError(response, ResultConstant.LOGIN_ERROR, 401);
         }
-        ErrorHandlerUtil.printError(response, ResultConstant.LOGIN_ERROR, 401);
     }
 
 
