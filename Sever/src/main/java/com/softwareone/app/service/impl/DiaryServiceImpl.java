@@ -1,5 +1,7 @@
 package com.softwareone.app.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.softwareone.app.bo.UpdateDiaryBo;
 import com.softwareone.app.constant.ResultConstant;
 import com.softwareone.app.vo.PageData;
@@ -35,24 +37,24 @@ public class DiaryServiceImpl extends ServiceImpl<DiaryMapper, Diary> implements
     }
 
     @Override
-    public Result deleteOwnDiary(Integer id) {
-        diaryMapper.deleteById(id);
+    public Result deleteOwnDiary(Integer id, Integer userId) {
+        diaryMapper.delete(new UpdateWrapper<Diary>().eq(Diary.COL_USER_ID, userId).eq(Diary.COL_ID, id));
         return ResultConstant.OK;
     }
 
     @Override
-    public Result deleteBatchDiary(List<Integer> idList) {
-        diaryMapper.deleteBatchIds(idList);
+    public Result deleteBatchDiary(List<Integer> idList, Integer userId) {
+        diaryMapper.delete(new UpdateWrapper<Diary>().eq(Diary.COL_USER_ID, userId).in(Diary.COL_ID, idList));
         return ResultConstant.OK;
     }
 
     @Override
-    public Result updateDiary(UpdateDiaryBo diary) {
+    public Result updateDiary(UpdateDiaryBo diary, Integer userId) {
         boolean flag = Objects.isNull(diary.getContent()) && Objects.isNull(diary.getDate())
                 && Objects.isNull(diary.getWeather()) && Objects.isNull(diary.getEmoji());
         //有内容传进来需要修改时
         if (!flag){
-            diaryMapper.updateByType(diary);
+            diaryMapper.updateByType(diary, userId);
         }
         return ResultConstant.OK;
     }

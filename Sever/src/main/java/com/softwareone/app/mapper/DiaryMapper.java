@@ -17,9 +17,10 @@ public interface DiaryMapper extends BaseMapper<Diary> {
     /***
      * 更新
      * @param diary 日记
+     * @param userId 标识
      * @return 更新条数
      */
-    int updateByType(UpdateDiaryBo diary);
+    int updateByType(UpdateDiaryBo diary, Integer userId);
 
     /***
      *根据年月日获取并分页

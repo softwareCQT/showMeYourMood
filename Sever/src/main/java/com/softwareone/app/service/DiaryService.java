@@ -24,24 +24,27 @@ public interface DiaryService extends IService<Diary> {
     /***
      * 删除个人日记
      * @param id 日记的id
+     * @param userId 用户标识
      * @return 删除是否成功
      */
-    Result deleteOwnDiary(Integer id);
+    Result deleteOwnDiary(Integer id, Integer userId);
 
 
     /***
      * 批量删除日记
      * @param idList id的list
+     * @param userId 用户标识
      * @return 删除是否成功
      */
-    Result deleteBatchDiary(List<Integer> idList);
+    Result deleteBatchDiary(List<Integer> idList, Integer userId);
 
     /***
      * 更新日记新编辑的内容，多字段选取更新
      * @param diary 日记
+     * @param userId 用户id
      * @return 更新是否成功
      */
-    Result updateDiary(UpdateDiaryBo diary);
+    Result updateDiary(UpdateDiaryBo diary, Integer userId);
 
     /***
      * 可根据年月日来选

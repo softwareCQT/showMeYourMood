@@ -14,7 +14,10 @@ import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author chenqiting
@@ -32,19 +35,19 @@ public class DiaryController {
     }
 
     @PostMapping("/api/diary/delete/{id}")
-    public Result deleteDiary(@PathVariable("id") Integer id) {
-        return diaryService.deleteOwnDiary(id);
+    public Result deleteDiary(@PathVariable("id") Integer id, UsernamePasswordAuthenticationToken token) {
+        return diaryService.deleteOwnDiary(id, (Integer) token.getPrincipal());
     }
 
 
     @PostMapping("/api/diary/deleteBatch")
-    public Result deleteDiaryBatch(@RequestBody @Valid @NotEmpty List<Integer> idList){
-        return diaryService.deleteBatchDiary(idList);
+    public Result deleteDiaryBatch(@RequestBody @Valid @NotEmpty Map<String, Object> map, UsernamePasswordAuthenticationToken token){
+        return diaryService.deleteBatchDiary((List<Integer>)map.get("idList"), (Integer)token.getPrincipal());
     }
 
     @PostMapping("/api/diary/update")
-    public Result updateDiary(@RequestBody @Valid UpdateDiaryBo diary){
-        return diaryService.updateDiary(diary);
+    public Result updateDiary(@RequestBody @Valid UpdateDiaryBo diary, UsernamePasswordAuthenticationToken token){
+        return diaryService.updateDiary(diary, (Integer)token.getPrincipal());
     }
 
     @GetMapping("/api/diary/get")

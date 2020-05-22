@@ -18,38 +18,37 @@
   <update id="updateByType">
     UPDATE diary
     <set>
-      <if test="content != null and content != ''">
-        content = #{content} ,
+      <if test="diary.content != null and diary.content != ''">
+        content = #{diary.content} ,
       </if>
-      <if test="emoji != null and emoji != ''">
-        emoji = #{emoji},
+      <if test="diary.emoji != null and diary.emoji != ''">
+        emoji = #{diary.emoji},
       </if>
-      <if test="date != null">
-        date = #{date},
+      <if test="diary.date != null">
+        date = #{diary.date},
       </if>
-      <if test="weather != null and weather != ''">
-        weather = #{weather}
+      <if test="diary.weather != null and diary.weather != ''">
+        weather = #{diary.weather}
       </if>
     </set>
-    WHERE id = #{id}
+    WHERE id = #{diary.id} AND user_id = #{userId}
   </update>
 
   <select id="selectDiaryByDateAndPage" resultType="com.softwareone.app.entity.Diary">
     SELECT <include refid="Base_Column_List"/>
     FROM diary
-    WHERE user_id = #{userId}
-    <if test="!(year == null and month == null and day == null) ">
-      HAVING
-          <if test="year != null">
-            DATE_FORMAT(date, '%Y') = #{year} AND
-          </if>
-          <if test="month != null">
-            DATE_FORMAT(date, '%m') = #{month} AND
-          </if>
-          <if test="day != null">
-            DATE_FORMAT(date,'%d') = #{day}
-          </if>
-    </if>
+    <where>
+      <if test="year != null">
+        DATE_FORMAT(date, '%Y') = #{year} AND
+      </if>
+      <if test="month != null">
+        DATE_FORMAT(date, '%m') = #{month} AND
+      </if>
+      <if test="day != null">
+        DATE_FORMAT(date,'%d') = #{day} AND
+      </if>
+      user_id = #{userId}
+    </where>
     ORDER BY date DESC
     <if test="pageLimit.size != null and pageLimit.page != null">
         <bind name="offset" value="(pageLimit.page - 1) * pageLimit.size"/>
@@ -59,9 +58,7 @@
   <select id="selectCountByDate" resultType="int">
     SELECT count(1)
     FROM diary
-    WHERE user_id = #{userId}
-    <if test="!(year == null and month == null and day == null) ">
-      HAVING
+    <where>
       <if test="year != null">
         DATE_FORMAT(date, '%Y') = #{year} AND
       </if>
@@ -69,8 +66,9 @@
         DATE_FORMAT(date, '%m') = #{month} AND
       </if>
       <if test="day != null">
-        DATE_FORMAT(date,'%d') = #{day}
+        DATE_FORMAT(date,'%d') = #{day} AND
       </if>
-    </if>
+      user_id = #{userId}
+    </where>
   </select>
 </mapper>

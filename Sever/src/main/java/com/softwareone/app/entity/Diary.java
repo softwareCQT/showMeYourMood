@@ -34,7 +34,6 @@ public class Diary {
     @TableField(value = "date")
     @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
     /**
