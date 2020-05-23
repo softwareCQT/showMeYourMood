@@ -1,3 +1,4 @@
+
 spring:
   application:
     name: weixin
@@ -28,3 +29,5 @@ mybatis:
 
 security:
   jwtDefaultExp: 1296000
+server:
+  port: 8002
