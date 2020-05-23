@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,9 +16,14 @@
 		B20E438724558CD900FEE651 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B20E438624558CD900FEE651 /* Preview Assets.xcassets */; };
 		B20E438A24558CD900FEE651 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B20E438824558CD900FEE651 /* LaunchScreen.storyboard */; };
 		B20EB8A5246D8F3300D848C8 /* NoteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20EB8A4246D8F3300D848C8 /* NoteStore.swift */; };
+		B20F9F0224757FA800A4A2E8 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20F9F0124757FA800A4A2E8 /* TextView.swift */; };
+		B20F9F042475826C00A4A2E8 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20F9F032475826C00A4A2E8 /* NoteView.swift */; };
+		B214643C2479206D0051842B /* FFUserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = B214643B2479206D0051842B /* FFUserDefault.swift */; };
 		B2239D33246A2E2000D19C26 /* LoadingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2239D32246A2E2000D19C26 /* LoadingButton.swift */; };
+		B22BF5712477A43F00CF1FAD /* AddNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22BF5702477A43F00CF1FAD /* AddNoteView.swift */; };
 		B23C6D2E24696E5C006DF363 /* KeyboardRespnder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23C6D2D24696E5C006DF363 /* KeyboardRespnder.swift */; };
 		B23C6D3224697C2A006DF363 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23C6D3124697C2A006DF363 /* LoadingView.swift */; };
+		B258B3E22479494A00E273A9 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B258B3E12479494A00E273A9 /* AccountView.swift */; };
 		B269617D24559B0E00D4DD08 /* NoteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B269617C24559B0E00D4DD08 /* NoteListView.swift */; };
 		B2C287FD246D9EB10064E345 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C287FC246D9EB10064E345 /* MenuView.swift */; };
 		B2C287FF246D9F200064E345 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C287FE246D9F1F0064E345 /* BlurView.swift */; };
@@ -39,9 +44,14 @@
 		B20E438924558CD900FEE651 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B20E438B24558CD900FEE651 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B20EB8A4246D8F3300D848C8 /* NoteStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteStore.swift; sourceTree = "<group>"; };
+		B20F9F0124757FA800A4A2E8 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
+		B20F9F032475826C00A4A2E8 /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
+		B214643B2479206D0051842B /* FFUserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFUserDefault.swift; sourceTree = "<group>"; };
 		B2239D32246A2E2000D19C26 /* LoadingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingButton.swift; sourceTree = "<group>"; };
+		B22BF5702477A43F00CF1FAD /* AddNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteView.swift; sourceTree = "<group>"; };
 		B23C6D2D24696E5C006DF363 /* KeyboardRespnder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardRespnder.swift; sourceTree = "<group>"; };
 		B23C6D3124697C2A006DF363 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		B258B3E12479494A00E273A9 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		B269617C24559B0E00D4DD08 /* NoteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListView.swift; sourceTree = "<group>"; };
 		B2C287FC246D9EB10064E345 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		B2C287FE246D9F1F0064E345 /* BlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
@@ -81,17 +91,16 @@
 		B20E437C24558CD600FEE651 /* Note */ = {
 			isa = PBXGroup;
 			children = (
+				B258B3E32479495000E273A9 /* Account */,
 				B23C6D3024697B0F006DF363 /* Tool */,
+				B2AFB1152475509000AB75F7 /* Note */,
 				B23C6D2F24697B02006DF363 /* Login */,
 				B20E437D24558CD600FEE651 /* AppDelegate.swift */,
 				B20E437F24558CD600FEE651 /* SceneDelegate.swift */,
-				B269617C24559B0E00D4DD08 /* NoteListView.swift */,
 				B20E438324558CD900FEE651 /* Assets.xcassets */,
 				B20E438824558CD900FEE651 /* LaunchScreen.storyboard */,
 				B20E438B24558CD900FEE651 /* Info.plist */,
 				B20E438524558CD900FEE651 /* Preview Content */,
-				B20EB8A4246D8F3300D848C8 /* NoteStore.swift */,
-				B2C287FC246D9EB10064E345 /* MenuView.swift */,
 			);
 			path = Note;
 			sourceTree = "<group>";
@@ -110,6 +119,7 @@
 				B2C287FE246D9F1F0064E345 /* BlurView.swift */,
 				B23C6D3124697C2A006DF363 /* LoadingView.swift */,
 				B2239D32246A2E2000D19C26 /* LoadingButton.swift */,
+				B20F9F0124757FA800A4A2E8 /* TextView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -129,8 +139,29 @@
 			children = (
 				B2239D34246A2E3900D19C26 /* View */,
 				B23C6D2D24696E5C006DF363 /* KeyboardRespnder.swift */,
+				B214643B2479206D0051842B /* FFUserDefault.swift */,
 			);
 			path = Tool;
+			sourceTree = "<group>";
+		};
+		B258B3E32479495000E273A9 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				B258B3E12479494A00E273A9 /* AccountView.swift */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		B2AFB1152475509000AB75F7 /* Note */ = {
+			isa = PBXGroup;
+			children = (
+				B269617C24559B0E00D4DD08 /* NoteListView.swift */,
+				B20EB8A4246D8F3300D848C8 /* NoteStore.swift */,
+				B2C287FC246D9EB10064E345 /* MenuView.swift */,
+				B20F9F032475826C00A4A2E8 /* NoteView.swift */,
+				B22BF5702477A43F00CF1FAD /* AddNoteView.swift */,
+			);
+			path = Note;
 			sourceTree = "<group>";
 		};
 		D6C0BDE263D6BBC065B9797E /* Pods */ = {
@@ -139,7 +170,6 @@
 				1ECB263E9A79232844B32DA1 /* Pods-Note.debug.xcconfig */,
 				99559A4BA3ABF9F8640E2E7C /* Pods-Note.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -269,14 +299,19 @@
 				B2239D33246A2E2000D19C26 /* LoadingButton.swift in Sources */,
 				B20E437E24558CD600FEE651 /* AppDelegate.swift in Sources */,
 				B20CB68E246982610091BFD3 /* LogonView.swift in Sources */,
+				B258B3E22479494A00E273A9 /* AccountView.swift in Sources */,
+				B20F9F0224757FA800A4A2E8 /* TextView.swift in Sources */,
 				B20EB8A5246D8F3300D848C8 /* NoteStore.swift in Sources */,
 				B23C6D2E24696E5C006DF363 /* KeyboardRespnder.swift in Sources */,
 				B2C287FF246D9F200064E345 /* BlurView.swift in Sources */,
 				B20E438024558CD600FEE651 /* SceneDelegate.swift in Sources */,
 				B2C287FD246D9EB10064E345 /* MenuView.swift in Sources */,
+				B22BF5712477A43F00CF1FAD /* AddNoteView.swift in Sources */,
 				B20E438224558CD600FEE651 /* LoginView.swift in Sources */,
 				B20CB6902469904D0091BFD3 /* ForgetView.swift in Sources */,
 				B269617D24559B0E00D4DD08 /* NoteListView.swift in Sources */,
+				B20F9F042475826C00A4A2E8 /* NoteView.swift in Sources */,
+				B214643C2479206D0051842B /* FFUserDefault.swift in Sources */,
 				B23C6D3224697C2A006DF363 /* LoadingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

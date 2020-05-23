@@ -9,6 +9,7 @@
 import UIKit
 
 let baseURL = "http://47.97.186.90:8002"
+
 let loginURL = "/api/user/login"
 let logonURL = "/api/user/register"
 let validURL = "/api/user/code/valid"
@@ -16,9 +17,20 @@ let passwordCodeURL = "/api/user/password/code/send"
 let registerCodeURL = "/api/user/register/code/send"
 let updatePasswordURL = "/api/user/password/update"
 
+let noteGetURL = "/api/diary/get"
+let noteSaveURL = "/api/diary/save"
+let noteDeleteURL = "/api/diary/delete/"
+let noteUpdateURL = "/api/diary/update"
+
+var Authorization : String? = FFUserDefalut.value(forKey: "Authorization") as? String {
+    didSet {
+        if let value = Authorization {
+                FFUserDefalut.saveValue(value, forKey: "Authorization")
+        }
+    }
+}
+
 var AppWindow: UIWindow?
-
-
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

@@ -18,9 +18,10 @@ struct LoginView: View {
     @State var pushLogon = false
     @State var pushForget = false
     @ObservedObject var keyboardResponder = KeyboardResponder()
+    
     func login() {
         DispatchQueue.main.async {
-            AppWindow!.rootViewController = UIHostingController(rootView: NoteListView())
+            AppWindow!.rootViewController = UIHostingController(rootView: NoteListView().environmentObject(NoteStore()))
         }
     }
     
@@ -91,6 +92,7 @@ struct UserTextField: View {
         )
     }
 }
+
 // 用户名输入框 用户密码输入框
 struct UserSecureField: View {
     @Binding var loginInfo : String

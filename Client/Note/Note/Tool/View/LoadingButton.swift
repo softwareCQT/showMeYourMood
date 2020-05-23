@@ -36,12 +36,15 @@ struct LoadingButton: View {
             
             request.responseJSON { response in
                 var status = false
-                
+                // 登录模块
                 if let dict = response.value as? Dictionary<String, Any> {
                     if let code = dict["code"] as? Int {
                         status = (code == 200)
                     }
                     self.message = dict["msg"] as! String
+                    if let authorization = dict["data"] as? String {
+                        Authorization = authorization
+                    }
                 }
                 
                 DispatchQueue.main.async {
@@ -59,7 +62,6 @@ struct LoadingButton: View {
         preRequest.responseJSON { response in
             var status = false
             if let dict = response.value as? Dictionary<String, Any> {
-                print(dict, response.request ?? "dad")
                 if let code = dict["code"] as? Int {
                     status = (code == 200)
                 }
@@ -69,6 +71,7 @@ struct LoadingButton: View {
                     self.message = "操作失败！"
                 }
             }
+
             if status {
                 request.responseJSON { response in
                     var status = false
@@ -96,9 +99,9 @@ struct LoadingButton: View {
     
     var body: some View {
         Button(title) {
+            self.isShowing.toggle()
             let result = self.vertifyBlock()
             if result.0 {
-                self.isShowing.toggle()
                 self.api {
                     self.isShowing.toggle()
                     if $0 {
@@ -114,12 +117,12 @@ struct LoadingButton: View {
                     }
                 }
             }else {
+                self.isShowing.toggle()
                 self.message = result.1 ?? "发生未知错误！"
                 self.showMes.toggle()
             }
         }.alert(isPresented: self.$showMes, content: {
-            
-            return Alert(title: Text(message))
+            Alert(title: Text(message))
         })
             .frame(width: 300, height: 42)
             .background(Color("lightBlueColor"))
