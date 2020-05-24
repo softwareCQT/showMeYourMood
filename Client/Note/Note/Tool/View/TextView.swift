@@ -11,7 +11,7 @@ import SwiftUI
 
 struct TextView: UIViewRepresentable {
     typealias UIViewType = UITextView
-    
+    var onEditBlock: () -> () = { }
     @Binding var text: String
     
     func updateUIView(_ uiView: UITextView, context: Context) {
@@ -46,6 +46,7 @@ struct TextView: UIViewRepresentable {
         
         func textViewDidChange(_ textView: UITextView) {
             parent.text = textView.text
+            parent.onEditBlock()
         }
 
     }

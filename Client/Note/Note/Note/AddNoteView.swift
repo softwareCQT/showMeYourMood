@@ -12,8 +12,9 @@ import Alamofire
 struct AddNoteView: View {
     @EnvironmentObject var noteStore: NoteStore
     @Binding var dismiss: Bool
-    @State var note = MyNote()
+    @State var note = NSKeyedUnarchiver.unarchiveObject(withFile: NoteCacheFilePath) as? MyNote ?? MyNote()
     @State var isPushing = false
+    
     func save() {
         AF.request(baseURL + noteSaveURL, method: .post, parameters: ["diaryName": note.diaryName, "content": note.content, "date": note.date, "emoji": note.emoji.emoji2String(), "weather": note.weather.weather2String()], encoder: JSONParameterEncoder.default, headers: ["Authorization": Authorization!]).responseJSON { response in
             // 上传中
@@ -29,6 +30,15 @@ struct AddNoteView: View {
 //                print(self.note.content, self.note.diaryName)
 //                print("上传成功！")
 //                self.noteStore.append(note: self.note)
+                // 删除
+//                print(NoteCacheFilePath)
+                 let fileManger = FileManager.default
+                        do{
+                            try fileManger.removeItem(atPath: NoteCacheFilePath)
+                            print("Success to remove file.")
+                        }catch{
+                            print("Failed to remove file.")
+                        }
                 self.dismiss.toggle()
             }else {
                 //上传失败
@@ -68,7 +78,9 @@ struct AddNoteView: View {
                     .font(.title).padding(.horizontal)
                 
                 Divider()
-                TextView(text: self.$note.content)
+                TextView(onEditBlock: {
+                    NoteCache = self.note
+                }, text: self.$note.content)
                     .frame(numLines: 20).padding()
                 
                 Divider()

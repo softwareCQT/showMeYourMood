@@ -27,6 +27,7 @@
 		B269617D24559B0E00D4DD08 /* NoteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B269617C24559B0E00D4DD08 /* NoteListView.swift */; };
 		B2C287FD246D9EB10064E345 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C287FC246D9EB10064E345 /* MenuView.swift */; };
 		B2C287FF246D9F200064E345 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C287FE246D9F1F0064E345 /* BlurView.swift */; };
+		B2E6B00824797C43001D366B /* AccountStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E6B00724797C43001D366B /* AccountStore.swift */; };
 		B3C1B5BA0F341254A466BD1E /* Pods_Note.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFC19102267598600865FD7C /* Pods_Note.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		B269617C24559B0E00D4DD08 /* NoteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListView.swift; sourceTree = "<group>"; };
 		B2C287FC246D9EB10064E345 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		B2C287FE246D9F1F0064E345 /* BlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
+		B2E6B00724797C43001D366B /* AccountStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStore.swift; sourceTree = "<group>"; };
 		EFC19102267598600865FD7C /* Pods_Note.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Note.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -148,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				B258B3E12479494A00E273A9 /* AccountView.swift */,
+				B2E6B00724797C43001D366B /* AccountStore.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 				B20CB6902469904D0091BFD3 /* ForgetView.swift in Sources */,
 				B269617D24559B0E00D4DD08 /* NoteListView.swift in Sources */,
 				B20F9F042475826C00A4A2E8 /* NoteView.swift in Sources */,
+				B2E6B00824797C43001D366B /* AccountStore.swift in Sources */,
 				B214643C2479206D0051842B /* FFUserDefault.swift in Sources */,
 				B23C6D3224697C2A006DF363 /* LoadingView.swift in Sources */,
 			);
@@ -380,7 +384,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -434,7 +438,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

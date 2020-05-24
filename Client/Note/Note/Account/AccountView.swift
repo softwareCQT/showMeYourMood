@@ -14,7 +14,20 @@ struct AccountView: View {
         ZStack {
             NavigationView {
                 List {
-                    Text("Hello, World!")
+                    HStack {
+                        VStack(alignment: .leading, spacing: 4) {
+                            
+                            Text("恰饭")
+                                .lineLimit(1)
+                                .font(.system(size: 20))
+                            
+                            Text("为了恰饭").lineLimit(1)
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                        }
+                        Spacer()
+                        Text("¥15")
+                    }
                 }.navigationBarTitle("账本")
                     .navigationBarItems(
                         leading: Button(action: {

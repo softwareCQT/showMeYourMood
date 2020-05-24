@@ -10,7 +10,27 @@ import SwiftUI
 import Combine
 import Alamofire
 
-struct MyNote: Identifiable {
+class MyNote: NSObject, Identifiable, NSCoding {
+   
+    required init?(coder: NSCoder) {
+        self.id = coder.decodeObject(forKey: "id") as? Int ?? -1
+        self.date = coder.decodeObject(forKey: "date") as! String
+        self.content = coder.decodeObject(forKey: "content") as! String
+        self.diaryName = coder.decodeObject(forKey: "diaryName") as! String
+        self.emoji = Emoji.string2emoji(coder.decodeObject(forKey: "diaryName") as? String) ?? .happy
+        self.weather = Weather.string2weather(coder.decodeObject(forKey: "diaryName") as? String) ?? .sunny
+    }
+    
+    func encode(with coder: NSCoder) {
+        coder.encode(self.id, forKey: "id")
+        coder.encode(self.date, forKey: "date")
+        coder.encode(self.content, forKey: "content")
+        coder.encode(self.diaryName, forKey: "diaryName")
+        coder.encode(self.emoji.emoji2String(), forKey: "emoji")
+        coder.encode(self.weather.weather2String(), forKey: "weather")
+        
+    }
+    
     var id: Int
     var date: String
     var content: String
@@ -19,9 +39,9 @@ struct MyNote: Identifiable {
     var weather: Weather
     
     // 待定
-    var userId: String
+    var userId: String = ""
     
-    init() {
+    override init() {
         id = -1
         date = date2String(Date()) 
         content = ""

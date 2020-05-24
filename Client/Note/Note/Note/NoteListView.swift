@@ -13,7 +13,9 @@ struct NoteListView: View {
     @EnvironmentObject var noteStore: NoteStore
     @State var showProfile = false
     @State var showAdd = false
+    @State var showCache = false
     @State var leave = false
+    @State var hasCache = NoteCache != nil
     
     func delete(_ i: Int) {
         let id = self.noteStore.notes[i].id
@@ -48,14 +50,14 @@ struct NoteListView: View {
                     ForEach(noteStore.notes) { note in
                         NavigationLink(destination:
                         NoteView(note: note, pushed: self.$leave)) {
-                            VStack(alignment: .leading, spacing: 8) {
+                            VStack(alignment: .leading,  spacing: 4) {
                                 
-                                    
+                                
                                 Text(note.diaryName).lineLimit(1)
                                     .font(.system(size: 20))
                                 Text(note.content).lineLimit(1)
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
                                 Text(note.date)
                                     .font(.subheadline)
                                     .foregroundColor(.secondary)
@@ -83,24 +85,25 @@ struct NoteListView: View {
                 Spacer()
                 HStack {
                     Spacer()
-                    Button(action: {
-                        self.showAdd.toggle()
-                    }) {
-                        ZStack {
-                            BlurView(style: .regular).frame(width: 50, height: 50)
-                            Image(systemName: "pencil.circle")
-                                .resizable()
-                                .frame(width: 50, height: 50)
-                                .clipShape(Circle())
-                                .overlay(Circle().stroke(Color("background2"), lineWidth: 2))
-                        }
-                    }.sheet( isPresented: $showAdd, onDismiss: {
-                        self.noteStore.load( { _ in 
-                            
-                        })
+                    VStack {
+                        Button(action: {
+                            self.showAdd.toggle()
+                        }) {
+                            ZStack {
+                                BlurView(style: .regular).frame(width: 50, height: 50)
+                                Image(systemName: "pencil.circle")
+                                    .resizable()
+                                    .frame(width: 50, height: 50)
+                                    .clipShape(Circle())
+                            }
+                        }.sheet( isPresented: $showAdd, onDismiss: {
+                            self.noteStore.load( { _ in
+                                
+                            })
                         }, content: {
-                        AddNoteView(dismiss: self.$showAdd).environmentObject(self.noteStore)
-                    })
+                            AddNoteView(dismiss: self.$showAdd).environmentObject(self.noteStore)
+                        })
+                    }
                 }
             }.padding()
                 .offset(x: leave ? 100 : 0, y: 0)
