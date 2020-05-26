@@ -14,7 +14,7 @@ public class UpdateDiaryBo {
     @NotNull
     private Integer id;
     private String content;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date date;
     private String weather;
     private String emoji;

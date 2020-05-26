@@ -13,6 +13,13 @@ spring:
     host: 47.97.186.90
     port: 6379
     password: chenqiting
+    lettuce:
+      pool:
+        max-idle: 8
+        max-active: 8
+        min-idle: 0
+        max-wait: 1000
+      shutdown-timeout: 100
   mail:
     host: smtp.qq.com
     port: 25
@@ -30,4 +37,4 @@ mybatis:
 security:
   jwtDefaultExp: 1296000
 server:
-  port: 8002
+    port: 8002

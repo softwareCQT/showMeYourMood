@@ -1,5 +1,6 @@
 package com.softwareone.app.service;
 
+import com.softwareone.app.constant.SystemConstant;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -34,6 +35,17 @@ public class AsyncService {
         message.setTo(to);
         //进行邮件发送
         javaMailSender.send(message);
+    }
+    @Async
+    public void sendMessageForTime(String message, String to) {
+        SimpleMailMessage email = new SimpleMailMessage();
+        //生成消息
+        email.setFrom(this.emailSender);
+        email.setText("（必备记）请不要忘记备忘录中的我喔：" + message);
+        email.setTo(to);
+        email.setSubject("必备记APP");
+        //邮件发送
+        javaMailSender.send(email);
     }
 
 }

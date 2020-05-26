@@ -5,7 +5,9 @@ import com.softwareone.app.entity.User;
 import com.softwareone.app.service.UserService;
 import com.softwareone.app.vo.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.format.annotation.NumberFormat;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,4 +54,5 @@ public class UserController {
     public Result updatePassword(@RequestBody @Valid User user) {
         return userService.updatePassword(user);
     }
+
 }

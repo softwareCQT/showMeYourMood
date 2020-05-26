@@ -1,5 +1,6 @@
 package com.softwareone.app.controller;
 
+import com.softwareone.app.bo.SaveMemorandumBo;
 import com.softwareone.app.bo.UpdateMemorandumBo;
 import com.softwareone.app.entity.Memorandum;
 import com.softwareone.app.service.MemorandumService;
@@ -33,9 +34,8 @@ public class MemorandumController {
         return memorandumService.deleteMemorandumById(id);
     }
     @PostMapping("/api/memorandum/save")
-    public Result saveMemorandum(@RequestBody @Valid Memorandum memorandum, UsernamePasswordAuthenticationToken token){
-
-        return memorandumService.saveMemorandum(memorandum, (Integer)token.getPrincipal());
+    public Result saveMemorandum(@RequestBody @Valid SaveMemorandumBo saveMemorandumBo, UsernamePasswordAuthenticationToken token){
+        return memorandumService.saveMemorandum(saveMemorandumBo, (Integer)token.getPrincipal());
     }
 
     @PostMapping("/api/memorandum/delete")

@@ -9,6 +9,8 @@ import com.softwareone.app.service.AsyncService;
 import com.softwareone.app.vo.Result;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -29,17 +31,16 @@ import com.softwareone.app.service.UserService;
  * @author chenqiting
  */
 @Service
-@RequiredArgsConstructor
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService{
-    @NonNull
+    @Autowired
     private UserMapper userMapper;
-    @NonNull
-    private StringRedisTemplate redisTemplate;
-    @NonNull
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
+    @Autowired
     private JwtUtil jwtUtil;
-    @NonNull
+    @Autowired
     private PasswordEncoder passwordEncoder;
-    @NonNull
+    @Autowired
     private AsyncService asyncService;
 
     @Override
@@ -75,12 +76,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public Result matchesCode(String email, String code) {
-        String exist = redisTemplate.opsForValue().get(email);
+        String exist = (String)redisTemplate.opsForValue().get(email);
         //验证失败
         if (StringUtils.isEmpty(exist) || !exist.equals(code)){
             return ResultConstant.CODE_ERROR;
         }
-        redisTemplate.delete(email);
         return ResultConstant.OK;
     }
 

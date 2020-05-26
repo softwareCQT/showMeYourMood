@@ -1,5 +1,6 @@
 package com.softwareone.app.service;
 
+import com.softwareone.app.bo.SaveMemorandumBo;
 import com.softwareone.app.bo.UpdateMemorandumBo;
 import com.softwareone.app.entity.Memorandum;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -30,11 +31,11 @@ public interface MemorandumService extends IService<Memorandum> {
 
     /***
      * 存储备忘录
-     * @param memorandum 备忘录的信息
+     * @param saveMemorandumBo 备忘录的信息和需要通知的时间
      * @param userId 用户id
      * @return 存储是否成功
      */
-    Result saveMemorandum(Memorandum memorandum, Integer userId);
+    Result saveMemorandum(SaveMemorandumBo saveMemorandumBo, Integer userId);
 
     /***
      * 批量删除
