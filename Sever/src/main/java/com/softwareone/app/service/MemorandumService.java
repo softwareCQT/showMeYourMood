@@ -25,9 +25,10 @@ public interface MemorandumService extends IService<Memorandum> {
     /***
      * 根据id删除
      * @param id id
+     * @param userId
      * @return 删除是否成功
      */
-    Result deleteMemorandumById(int id);
+    Result deleteMemorandumById(int id, Integer userId);
 
     /***
      * 存储备忘录
@@ -40,9 +41,10 @@ public interface MemorandumService extends IService<Memorandum> {
     /***
      * 批量删除
      * @param idList id的集合
+     * @param userId
      * @return 数据
      */
-    Result deleteBatchMemorandum(List<Integer> idList);
+    Result deleteBatchMemorandum(List<Integer> idList, Integer userId);
 
     /***
      * 更新备忘录

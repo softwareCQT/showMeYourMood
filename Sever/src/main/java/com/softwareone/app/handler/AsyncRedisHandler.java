@@ -37,7 +37,6 @@ public class AsyncRedisHandler implements Runnable {
 
     @Override
     public void run() {
-
         Set<Memorandum> set = operations.rangeByScore(SystemConstant.REMEMBER_KEY, 0, System.currentTimeMillis());
 
         if (!(set == null || set.isEmpty())) {

@@ -14,6 +14,8 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author chenqiting
@@ -30,17 +32,17 @@ public class MemorandumController {
         return memorandumService.getMemorandum(pageLimit, (Integer) token.getPrincipal());
     }
     @PostMapping("/api/memorandum/delete/{id}")
-    public Result deleteMemorandumById(@PathVariable("id") int id){
-        return memorandumService.deleteMemorandumById(id);
+    public Result deleteMemorandumById(@PathVariable("id") int id, UsernamePasswordAuthenticationToken token){
+        return memorandumService.deleteMemorandumById(id, (Integer)token.getPrincipal());
     }
     @PostMapping("/api/memorandum/save")
     public Result saveMemorandum(@RequestBody @Valid SaveMemorandumBo saveMemorandumBo, UsernamePasswordAuthenticationToken token){
         return memorandumService.saveMemorandum(saveMemorandumBo, (Integer)token.getPrincipal());
     }
 
-    @PostMapping("/api/memorandum/delete")
-    public Result deleteBatchMemorandum(@RequestBody @Valid @NotEmpty List<Integer> idList) {
-        return memorandumService.deleteBatchMemorandum(idList);
+    @PostMapping("/api/memorandum/deleteBatch")
+    public Result deleteBatchMemorandum(@RequestBody @Valid @NotEmpty Map<String, Object> map, UsernamePasswordAuthenticationToken token) {
+        return memorandumService.deleteBatchMemorandum((List<Integer>)map.get("idList"), (Integer)token.getPrincipal());
     }
     @PostMapping("/api/memorandum/update")
     public Result updateMemorandum(@RequestBody @Valid UpdateMemorandumBo updateMemorandumBo) {

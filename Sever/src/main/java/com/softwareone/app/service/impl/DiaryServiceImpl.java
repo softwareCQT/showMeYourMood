@@ -9,8 +9,10 @@ import com.softwareone.app.vo.PageLimit;
 import com.softwareone.app.vo.Result;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -30,6 +32,11 @@ public class DiaryServiceImpl extends ServiceImpl<DiaryMapper, Diary> implements
     private DiaryMapper diaryMapper;
     @Override
     public Result saveDiary(Diary diary, int userId) {
+        Diary diary1 = diaryMapper.selectOne(new QueryWrapper<Diary>().eq(Diary.COL_DATE, diary.getDate()).eq(Diary.COL_USER_ID, userId));
+        //不能重复添加日记
+        if (Objects.nonNull(diary1)) {
+            return ResultConstant.DIARY_EXIST;
+        }
         //设置好用户
         diary.setUserId(userId);
         diaryMapper.insert(diary);

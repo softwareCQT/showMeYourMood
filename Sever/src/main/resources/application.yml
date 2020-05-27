@@ -1,7 +1,7 @@
 
 spring:
   application:
-    name: weixin
+    name: app
   datasource:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
@@ -22,10 +22,22 @@ spring:
       shutdown-timeout: 100
   mail:
     host: smtp.qq.com
-    port: 25
+    port: 465
     username: 1179374184@qq.com
     password: kbtphmwneiyrhahj
     default-encoding: utf-8
+    properties.mail.smtp.ssl.enable: true
+    test-connection: true
+#    properties:
+#      smtp:
+#        auth: true
+#        starttls:
+#          enable: true
+#          required: true
+#        socketFactory:
+#          port: 465
+#          class: javax.net.ssl.SSLSocketFactory
+#          allback: false
 
 mybatis:
   configuration:
