@@ -1,25 +1,23 @@
 //
-//  NoteList.swift
+//  memorandumView.swift
 //  Note
 //
-//  Created by 峰 on 2020/4/26.
+//  Created by 峰 on 2020/5/26.
 //  Copyright © 2020 峰. All rights reserved.
 //
 
 import SwiftUI
 import Alamofire
 
-struct NoteListView: View {
-    @EnvironmentObject var noteStore: NoteStore
+struct MemorandumView: View {
+    @EnvironmentObject var memoStore: MemoStore
     @State var showProfile = false
     @State var showAdd = false
-    @State var showCache = false
     @State var leave = false
-    @State var hasCache = NoteCache != nil
     
     func delete(_ i: Int) {
-        let id = self.noteStore.notes[i].id
-        AF.request( baseURL + noteDeleteURL + String(id), method: .post, headers: ["Authorization": Authorization!]).responseJSON { response in
+        let id = self.memoStore.memos[i].id
+        AF.request( baseURL + memoDeleteURL + String(id), method: .post, headers: ["Authorization": Authorization!]).responseJSON { response in
             var status = false
             // 登录模块
             if let dict = response.value as? Dictionary<String, Any> {
@@ -31,7 +29,7 @@ struct NoteListView: View {
                 }
             }
             if status {
-                self.noteStore.notes.remove(at: i)
+                self.memoStore.memos.remove(at: i)
                 print("删除成功")
             }else {
                 print("删除失败")
@@ -40,27 +38,30 @@ struct NoteListView: View {
     }
     
     func move(from source: IndexSet, to destination: Int) {
-        noteStore.notes.move(fromOffsets: source, toOffset: destination)
+        memoStore.memos.move(fromOffsets: source, toOffset: destination)
     }
     
     var body: some View {
         ZStack {
             NavigationView {
                 List {
-                    ForEach(noteStore.notes) { note in
+                    ForEach(memoStore.memos) { memo in
                         NavigationLink(destination:
-                        NoteView(note: note, pushed: self.$leave)) {
+                            MemoView(memo: memo, pushed: self.$leave)) {
                             VStack(alignment: .leading,  spacing: 8) {
                                 
                                 
-                                Text(note.diaryName).lineLimit(1)
+                                Text(memo.content).lineLimit(1)
                                     .font(.title)
-//                                Text(note.content).lineLimit(1)
-//                                    .font(.subheadline)
-//                                    .foregroundColor(.secondary)
-                                Text(note.date)
-                                    .font(.subheadline)
-                                    .foregroundColor(.secondary)
+                                
+                                HStack {
+                                    Text("创建时间")
+                                        .font(.subheadline)
+                                        .foregroundColor(.secondary)
+                                    Text(memo.createTime)
+                                        .font(.subheadline)
+                                        .foregroundColor(.secondary)
+                                }
                             }.padding(.vertical)
                         }
                     }.onDelete { index in
@@ -69,7 +70,7 @@ struct NoteListView: View {
                         }
                     }
                     .onMove(perform: move)
-                }.navigationBarTitle("我的日记")
+                }.navigationBarTitle("备忘录")
                     .navigationBarItems(
                         leading: Button(action: {
                             self.showProfile.toggle()
@@ -91,17 +92,17 @@ struct NoteListView: View {
                         }) {
                             ZStack {
                                 BlurView(style: .regular).frame(width: 50, height: 50)
-                                Image(systemName: "pencil.circle")
+                                Image(systemName: "plus.circle")
                                     .resizable()
                                     .frame(width: 50, height: 50)
                                     .clipShape(Circle())
                             }
                         }.sheet( isPresented: $showAdd, onDismiss: {
-                            self.noteStore.load( { _ in
+                            self.memoStore.load( { _ in
                                 
                             })
                         }, content: {
-                            AddNoteView(dismiss: self.$showAdd).environmentObject(self.noteStore)
+                            AddMemoView(dismiss: self.$showAdd).environmentObject(self.memoStore)
                         })
                     }
                 }
@@ -119,15 +120,10 @@ struct NoteListView: View {
                 .offset(x: 0, y: showProfile ? 0 : UIScreen.main.bounds.height)
                 .animation(.spring())
         }.onAppear {
-            self.noteStore.load({ _ in
+            self.memoStore.load({ _ in
                 
             })
+            
         }
-    }
-}
-
-struct NoteList_Previews: PreviewProvider {
-    static var previews: some View {
-        NoteListView().environmentObject(NoteStore())
     }
 }

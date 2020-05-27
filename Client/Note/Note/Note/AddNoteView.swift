@@ -8,12 +8,14 @@
 
 import SwiftUI
 import Alamofire
-
 struct AddNoteView: View {
     @EnvironmentObject var noteStore: NoteStore
     @Binding var dismiss: Bool
     @State var note = NSKeyedUnarchiver.unarchiveObject(withFile: NoteCacheFilePath) as? MyNote ?? MyNote()
     @State var isPushing = false
+    @State var error: Bool = false
+    @State var showDraw = false
+    @State var leave = false
     
     func save() {
         AF.request(baseURL + noteSaveURL, method: .post, parameters: ["diaryName": note.diaryName, "content": note.content, "date": note.date, "emoji": note.emoji.emoji2String(), "weather": note.weather.weather2String()], encoder: JSONParameterEncoder.default, headers: ["Authorization": Authorization!]).responseJSON { response in
@@ -26,23 +28,17 @@ struct AddNoteView: View {
             }
             self.isPushing.toggle()
             if status {
-                // 上传成功
-//                print(self.note.content, self.note.diaryName)
-//                print("上传成功！")
-//                self.noteStore.append(note: self.note)
-                // 删除
-//                print(NoteCacheFilePath)
-                 let fileManger = FileManager.default
-                        do{
-                            try fileManger.removeItem(atPath: NoteCacheFilePath)
-                            print("Success to remove file.")
-                        }catch{
-                            print("Failed to remove file.")
-                        }
+                let fileManger = FileManager.default
+                do{
+                    try fileManger.removeItem(atPath: NoteCacheFilePath)
+                    print("Success to remove file.")
+                }catch{
+                    print("Failed to remove file.")
+                }
                 self.dismiss.toggle()
             }else {
                 //上传失败
-                print("上传失败！")
+                self.error.toggle()
             }
             
         }
@@ -50,6 +46,7 @@ struct AddNoteView: View {
     
     var body: some View {
         LoadingView(isShowing: $isPushing) {
+            
             VStack {
                 VStack {
                     HStack {
@@ -60,6 +57,8 @@ struct AddNoteView: View {
                             self.save()
                         }, label: {
                             Text("保存")
+                        }).alert(isPresented: self.$error, content: {
+                            Alert(title: Text("上传失败！"))
                         }).padding()
                             .padding(.trailing, 10)
                             .padding(.top, 10)
@@ -74,14 +73,45 @@ struct AddNoteView: View {
                     
                 }.background(BlurView(style: .prominent))
                 
+                
                 TextField("标题", text: self.$note.diaryName)
-                    .font(.title).padding(.horizontal)
+                    .font(.title)
+                    .padding(.horizontal)
+                    
                 
                 Divider()
-                TextView(onEditBlock: {
-                    NoteCache = self.note
-                }, text: self.$note.content)
-                    .frame(numLines: 20).padding()
+                
+                
+                ZStack {
+                    TextView(onEditBlock: {
+                        NoteCache = self.note
+                    }, text: self.$note.content)
+                        .frame(numLines: 20).padding()
+                    
+                    VStack {
+                        Spacer()
+                        HStack {
+                            Spacer()
+                            VStack {
+                                Button(action: {
+                                    self.showDraw.toggle()
+                                }) {
+                                    ZStack {
+                                        BlurView(style: .regular).frame(width: 30, height: 30)
+                                        Image(systemName: "pencil.tip.crop.circle")
+                                            .resizable()
+                                            .frame(width: 30, height: 30)
+                                            .clipShape(Circle())
+                                    }
+                                }.sheet( isPresented: self.$showDraw,
+                                         content: {
+                                            FFDrawView()
+                                })
+                            }
+                        }
+                    }.padding()
+                    
+                }
                 
                 Divider()
                 VStack {

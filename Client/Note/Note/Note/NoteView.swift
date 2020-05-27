@@ -15,6 +15,7 @@ struct NoteView: View {
     @Binding var pushed: Bool
     @State var showAlert = false
     @State var message = ""
+    @State var showDraw = false
     
     func noteIndex() -> Int? {
         noteStore.notes.firstIndex(where: {
@@ -53,7 +54,33 @@ struct NoteView: View {
         List {
             VStack {
                 
-                TextView(text: $note.content).frame(numLines: 25)
+                ZStack {
+                    TextView(text: $note.content).frame(numLines: 25)
+                    
+                    VStack {
+                        Spacer()
+                        HStack {
+                            Spacer()
+                            VStack {
+                                Button(action: {
+                                    self.showDraw.toggle()
+                                }) {
+                                    ZStack {
+                                        BlurView(style: .regular).frame(width: 30, height: 30)
+                                        Image(systemName: "pencil.tip.crop.circle")
+                                            .resizable()
+                                            .frame(width: 30, height: 30)
+                                            .clipShape(Circle())
+                                    }
+                                }.sheet( isPresented: self.$showDraw,
+                                         content: {
+                                            FFDrawView()
+                                })
+                            }
+                        }
+                    }.padding()
+                    
+                }
                 
                 Divider()
                 

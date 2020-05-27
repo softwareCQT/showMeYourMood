@@ -28,7 +28,7 @@ class MyNote: NSObject, Identifiable, NSCoding {
         coder.encode(self.diaryName, forKey: "diaryName")
         coder.encode(self.emoji.emoji2String(), forKey: "emoji")
         coder.encode(self.weather.weather2String(), forKey: "weather")
-        
+       
     }
     
     var id: Int
@@ -37,6 +37,7 @@ class MyNote: NSObject, Identifiable, NSCoding {
     var diaryName: String
     var emoji: Emoji
     var weather: Weather
+    var urlArray: Array<String> = []
     
     // 待定
     var userId: String = ""
@@ -157,6 +158,15 @@ final class NoteStore: ObservableObject {
             }
         }
     }
+}
+
+
+func date2String1(_ date:Date, dateFormat:String = "yyyy-MM-dd HH:mm:ss") -> String {
+    let formatter = DateFormatter()
+    formatter.locale = Locale.init(identifier: "zh_CN")
+    formatter.dateFormat = dateFormat
+    let date = formatter.string(from: date)
+    return date
 }
 
 func date2String(_ date:Date, dateFormat:String = "yyyy-MM-dd") -> String {

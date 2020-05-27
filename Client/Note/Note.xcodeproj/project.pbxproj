@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B20689D1247D531500D863AD /* MemorandumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20689D0247D531400D863AD /* MemorandumView.swift */; };
+		B20689D3247D562D00D863AD /* MemoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20689D2247D562D00D863AD /* MemoStore.swift */; };
 		B20CB68E246982610091BFD3 /* LogonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20CB68D246982610091BFD3 /* LogonView.swift */; };
 		B20CB6902469904D0091BFD3 /* ForgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20CB68F2469904D0091BFD3 /* ForgetView.swift */; };
 		B20E437E24558CD600FEE651 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20E437D24558CD600FEE651 /* AppDelegate.swift */; };
@@ -20,11 +22,18 @@
 		B20F9F042475826C00A4A2E8 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20F9F032475826C00A4A2E8 /* NoteView.swift */; };
 		B214643C2479206D0051842B /* FFUserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = B214643B2479206D0051842B /* FFUserDefault.swift */; };
 		B2239D33246A2E2000D19C26 /* LoadingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2239D32246A2E2000D19C26 /* LoadingButton.swift */; };
+		B227A65E247D6D8900EC75B2 /* MemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227A65D247D6D8900EC75B2 /* MemoView.swift */; };
+		B227A660247D7CA700EC75B2 /* AddMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227A65F247D7CA700EC75B2 /* AddMemoView.swift */; };
 		B22BF5712477A43F00CF1FAD /* AddNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22BF5702477A43F00CF1FAD /* AddNoteView.swift */; };
 		B23C6D2E24696E5C006DF363 /* KeyboardRespnder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23C6D2D24696E5C006DF363 /* KeyboardRespnder.swift */; };
 		B23C6D3224697C2A006DF363 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23C6D3124697C2A006DF363 /* LoadingView.swift */; };
 		B258B3E22479494A00E273A9 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B258B3E12479494A00E273A9 /* AccountView.swift */; };
+		B2681737247AB65D00337DF5 /* DrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2681735247AB65C00337DF5 /* DrawView.swift */; };
+		B2681738247AB65D00337DF5 /* DrawImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2681736247AB65D00337DF5 /* DrawImageView.swift */; };
+		B268173C247AC32B00337DF5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B268173B247AC32B00337DF5 /* Main.storyboard */; };
+		B268173E247AC33300337DF5 /* DrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B268173D247AC33300337DF5 /* DrawViewController.swift */; };
 		B269617D24559B0E00D4DD08 /* NoteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B269617C24559B0E00D4DD08 /* NoteListView.swift */; };
+		B2BDA3E6247BF0DE00A59A33 /* ImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2BDA3E5247BF0DE00A59A33 /* ImageStore.swift */; };
 		B2C287FD246D9EB10064E345 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C287FC246D9EB10064E345 /* MenuView.swift */; };
 		B2C287FF246D9F200064E345 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C287FE246D9F1F0064E345 /* BlurView.swift */; };
 		B2E6B00824797C43001D366B /* AccountStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E6B00724797C43001D366B /* AccountStore.swift */; };
@@ -34,6 +43,8 @@
 /* Begin PBXFileReference section */
 		1ECB263E9A79232844B32DA1 /* Pods-Note.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Note.debug.xcconfig"; path = "Target Support Files/Pods-Note/Pods-Note.debug.xcconfig"; sourceTree = "<group>"; };
 		99559A4BA3ABF9F8640E2E7C /* Pods-Note.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Note.release.xcconfig"; path = "Target Support Files/Pods-Note/Pods-Note.release.xcconfig"; sourceTree = "<group>"; };
+		B20689D0247D531400D863AD /* MemorandumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorandumView.swift; sourceTree = "<group>"; };
+		B20689D2247D562D00D863AD /* MemoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoStore.swift; sourceTree = "<group>"; };
 		B20CB68D246982610091BFD3 /* LogonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogonView.swift; sourceTree = "<group>"; };
 		B20CB68F2469904D0091BFD3 /* ForgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetView.swift; sourceTree = "<group>"; };
 		B20E437A24558CD600FEE651 /* Note.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Note.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,11 +60,19 @@
 		B20F9F032475826C00A4A2E8 /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		B214643B2479206D0051842B /* FFUserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFUserDefault.swift; sourceTree = "<group>"; };
 		B2239D32246A2E2000D19C26 /* LoadingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingButton.swift; sourceTree = "<group>"; };
+		B227A65D247D6D8900EC75B2 /* MemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoView.swift; sourceTree = "<group>"; };
+		B227A65F247D7CA700EC75B2 /* AddMemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemoView.swift; sourceTree = "<group>"; };
 		B22BF5702477A43F00CF1FAD /* AddNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteView.swift; sourceTree = "<group>"; };
 		B23C6D2D24696E5C006DF363 /* KeyboardRespnder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardRespnder.swift; sourceTree = "<group>"; };
 		B23C6D3124697C2A006DF363 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		B258B3E12479494A00E273A9 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		B2681735247AB65C00337DF5 /* DrawView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawView.swift; sourceTree = "<group>"; };
+		B2681736247AB65D00337DF5 /* DrawImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawImageView.swift; sourceTree = "<group>"; };
+		B268173B247AC32B00337DF5 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		B268173D247AC33300337DF5 /* DrawViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawViewController.swift; sourceTree = "<group>"; };
 		B269617C24559B0E00D4DD08 /* NoteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListView.swift; sourceTree = "<group>"; };
+		B29B2D92247A42FF0039AF78 /* Note-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Note-Bridging-Header.h"; sourceTree = "<group>"; };
+		B2BDA3E5247BF0DE00A59A33 /* ImageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStore.swift; sourceTree = "<group>"; };
 		B2C287FC246D9EB10064E345 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		B2C287FE246D9F1F0064E345 /* BlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 		B2E6B00724797C43001D366B /* AccountStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStore.swift; sourceTree = "<group>"; };
@@ -72,6 +91,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B20689CF247D52AD00D863AD /* Memorandum */ = {
+			isa = PBXGroup;
+			children = (
+				B20689D0247D531400D863AD /* MemorandumView.swift */,
+				B20689D2247D562D00D863AD /* MemoStore.swift */,
+				B227A65D247D6D8900EC75B2 /* MemoView.swift */,
+				B227A65F247D7CA700EC75B2 /* AddMemoView.swift */,
+			);
+			path = Memorandum;
+			sourceTree = "<group>";
+		};
 		B20E437124558CD600FEE651 = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +123,7 @@
 		B20E437C24558CD600FEE651 /* Note */ = {
 			isa = PBXGroup;
 			children = (
+				B20689CF247D52AD00D863AD /* Memorandum */,
 				B258B3E32479495000E273A9 /* Account */,
 				B23C6D3024697B0F006DF363 /* Tool */,
 				B2AFB1152475509000AB75F7 /* Note */,
@@ -103,6 +134,7 @@
 				B20E438824558CD900FEE651 /* LaunchScreen.storyboard */,
 				B20E438B24558CD900FEE651 /* Info.plist */,
 				B20E438524558CD900FEE651 /* Preview Content */,
+				B29B2D92247A42FF0039AF78 /* Note-Bridging-Header.h */,
 			);
 			path = Note;
 			sourceTree = "<group>";
@@ -118,6 +150,10 @@
 		B2239D34246A2E3900D19C26 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B2681736247AB65D00337DF5 /* DrawImageView.swift */,
+				B268173D247AC33300337DF5 /* DrawViewController.swift */,
+				B2681735247AB65C00337DF5 /* DrawView.swift */,
+				B268173B247AC32B00337DF5 /* Main.storyboard */,
 				B2C287FE246D9F1F0064E345 /* BlurView.swift */,
 				B23C6D3124697C2A006DF363 /* LoadingView.swift */,
 				B2239D32246A2E2000D19C26 /* LoadingButton.swift */,
@@ -142,6 +178,7 @@
 				B2239D34246A2E3900D19C26 /* View */,
 				B23C6D2D24696E5C006DF363 /* KeyboardRespnder.swift */,
 				B214643B2479206D0051842B /* FFUserDefault.swift */,
+				B2BDA3E5247BF0DE00A59A33 /* ImageStore.swift */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -218,6 +255,7 @@
 				TargetAttributes = {
 					B20E437924558CD600FEE651 = {
 						CreatedOnToolsVersion = 11.4.1;
+						LastSwiftMigration = 1140;
 					};
 				};
 			};
@@ -247,6 +285,7 @@
 				B20E438A24558CD900FEE651 /* LaunchScreen.storyboard in Resources */,
 				B20E438724558CD900FEE651 /* Preview Assets.xcassets in Resources */,
 				B20E438424558CD900FEE651 /* Assets.xcassets in Resources */,
+				B268173C247AC32B00337DF5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,19 +342,27 @@
 				B20E437E24558CD600FEE651 /* AppDelegate.swift in Sources */,
 				B20CB68E246982610091BFD3 /* LogonView.swift in Sources */,
 				B258B3E22479494A00E273A9 /* AccountView.swift in Sources */,
+				B20689D1247D531500D863AD /* MemorandumView.swift in Sources */,
+				B227A65E247D6D8900EC75B2 /* MemoView.swift in Sources */,
+				B268173E247AC33300337DF5 /* DrawViewController.swift in Sources */,
 				B20F9F0224757FA800A4A2E8 /* TextView.swift in Sources */,
 				B20EB8A5246D8F3300D848C8 /* NoteStore.swift in Sources */,
 				B23C6D2E24696E5C006DF363 /* KeyboardRespnder.swift in Sources */,
 				B2C287FF246D9F200064E345 /* BlurView.swift in Sources */,
 				B20E438024558CD600FEE651 /* SceneDelegate.swift in Sources */,
 				B2C287FD246D9EB10064E345 /* MenuView.swift in Sources */,
+				B2BDA3E6247BF0DE00A59A33 /* ImageStore.swift in Sources */,
+				B20689D3247D562D00D863AD /* MemoStore.swift in Sources */,
 				B22BF5712477A43F00CF1FAD /* AddNoteView.swift in Sources */,
 				B20E438224558CD600FEE651 /* LoginView.swift in Sources */,
 				B20CB6902469904D0091BFD3 /* ForgetView.swift in Sources */,
 				B269617D24559B0E00D4DD08 /* NoteListView.swift in Sources */,
 				B20F9F042475826C00A4A2E8 /* NoteView.swift in Sources */,
+				B227A660247D7CA700EC75B2 /* AddMemoView.swift in Sources */,
 				B2E6B00824797C43001D366B /* AccountStore.swift in Sources */,
+				B2681737247AB65D00337DF5 /* DrawView.swift in Sources */,
 				B214643C2479206D0051842B /* FFUserDefault.swift in Sources */,
+				B2681738247AB65D00337DF5 /* DrawImageView.swift in Sources */,
 				B23C6D3224697C2A006DF363 /* LoadingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -453,6 +500,7 @@
 			baseConfigurationReference = 1ECB263E9A79232844B32DA1 /* Pods-Note.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Note/Preview Content\"";
 				DEVELOPMENT_TEAM = G59LUC6995;
@@ -464,6 +512,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = feng.Note;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Note/Note-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -474,6 +524,7 @@
 			baseConfigurationReference = 99559A4BA3ABF9F8640E2E7C /* Pods-Note.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Note/Preview Content\"";
 				DEVELOPMENT_TEAM = G59LUC6995;
@@ -485,6 +536,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = feng.Note;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Note/Note-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

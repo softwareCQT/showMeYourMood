@@ -10,3 +10,4 @@ target 'Note' do
 end
 
 pod 'Alamofire', '~> 5.2'
+pod 'RZRichTextView'

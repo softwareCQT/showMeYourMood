@@ -18,10 +18,21 @@ struct MenuView: View {
             MenuRow(title: "账本管理", icon: "cart", btnClickBlock: {
                 AppWindow!.rootViewController = UIHostingController(rootView: AccountView())
             })
+            MenuRow(title: "备忘录", icon: "equal.square", btnClickBlock: {
+                AppWindow!.rootViewController = UIHostingController(rootView: MemorandumView().environmentObject(MemoStore()))
+            })
             Divider()
             MenuRow(title: "退出登录", icon: "arrowshape.turn.up.right", btnClickBlock: {
                 FFUserDefalut.removeObject(forKey: "Authorization")
                 AppWindow!.rootViewController = UIHostingController(rootView: LoginView())
+                let fileManger = FileManager.default
+                do{
+                    try fileManger.removeItem(atPath: NoteCacheFilePath)
+                    print("Success to remove file.")
+                }catch{
+                    print("Failed to remove file.")
+                }
+                
             })
             Spacer()
         }.padding()

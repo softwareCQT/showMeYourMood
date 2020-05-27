@@ -22,6 +22,11 @@ let noteSaveURL = "/api/diary/save"
 let noteDeleteURL = "/api/diary/delete/"
 let noteUpdateURL = "/api/diary/update"
 
+let memoGetURL = "/api/memorandum/get"
+let memoDeleteURL = "/api/memorandum/delete/"
+let memoUpdateURL = "/api/memorandum/update"
+let memoSaveURL = "/api/memorandum/save"
+
 var Authorization : String? = FFUserDefalut.value(forKey: "Authorization") as? String {
     didSet {
         if let value = Authorization {
@@ -46,10 +51,9 @@ var AppWindow: UIWindow?
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
         return true
     }
     
