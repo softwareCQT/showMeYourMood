@@ -118,6 +118,11 @@ struct SendVerifyCodeView: View {
                         if let code = dict["code"] as? Int {
                             status = (code == 200)
                         }
+                        if let msg = dict["msg"] as? String {
+                            self.message = msg
+                        }else {
+                            self.message = "发生错误"
+                        }
                     }
                     
                     if status {
@@ -140,7 +145,7 @@ struct SendVerifyCodeView: View {
                         self.timer!.resume()
                     }else {
                         self.showMes.toggle()
-                        self.message = "发送失败，请检查邮箱格式！"
+                        
                     }
                 }
             }.disabled(isSending)
