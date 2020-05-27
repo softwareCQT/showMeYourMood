@@ -1,9 +1,9 @@
 package com.softwareone.app.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.softwareone.app.bo.SaveMemorandumBo;
 import com.softwareone.app.bo.UpdateMemorandumBo;
 import com.softwareone.app.entity.Memorandum;
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.softwareone.app.vo.PageLimit;
 import com.softwareone.app.vo.Result;
 

@@ -2,24 +2,21 @@ package com.softwareone.app.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.softwareone.app.bo.UpdateDiaryBo;
 import com.softwareone.app.constant.ResultConstant;
+import com.softwareone.app.entity.Diary;
+import com.softwareone.app.mapper.DiaryMapper;
+import com.softwareone.app.service.DiaryService;
 import com.softwareone.app.vo.PageData;
 import com.softwareone.app.vo.PageLimit;
 import com.softwareone.app.vo.Result;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Service;
-import javax.annotation.Resource;
-import java.util.Date;
+
 import java.util.List;
 import java.util.Objects;
-
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.softwareone.app.entity.Diary;
-import com.softwareone.app.mapper.DiaryMapper;
-import com.softwareone.app.service.DiaryService;
 
 /***
  * @author chenqiting
@@ -30,6 +27,7 @@ public class DiaryServiceImpl extends ServiceImpl<DiaryMapper, Diary> implements
 
     @NonNull
     private DiaryMapper diaryMapper;
+
     @Override
     public Result saveDiary(Diary diary, int userId) {
         Diary diary1 = diaryMapper.selectOne(new QueryWrapper<Diary>().eq(Diary.COL_DATE, diary.getDate()).eq(Diary.COL_USER_ID, userId));
@@ -60,7 +58,7 @@ public class DiaryServiceImpl extends ServiceImpl<DiaryMapper, Diary> implements
         boolean flag = Objects.isNull(diary.getContent()) && Objects.isNull(diary.getDate())
                 && Objects.isNull(diary.getWeather()) && Objects.isNull(diary.getEmoji());
         //有内容传进来需要修改时
-        if (!flag){
+        if (!flag) {
             diaryMapper.updateByType(diary, userId);
         }
         return ResultConstant.OK;

@@ -6,19 +6,14 @@ import com.softwareone.app.entity.User;
 import com.softwareone.app.mapper.UserMapper;
 import com.softwareone.app.service.AsyncService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author chenqiting
@@ -44,9 +39,9 @@ public class AsyncRedisHandler implements Runnable {
             for (Memorandum memorandum : set) {
                 //先移除，防止并发
                 Long count = operations.remove(SystemConstant.REMEMBER_KEY, memorandum);
-                if (Objects.nonNull(count) && count != 0){
+                if (Objects.nonNull(count) && count != 0) {
                     User user = userMapper.selectById(memorandum.getUserId());
-                    asyncService.sendMessageForTime(memorandum.getContent(),user.getEmail());
+                    asyncService.sendMessageForTime(memorandum.getContent(), user.getEmail());
                 }
             }
         }

@@ -1,103 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.softwareone.app.mapper.LedgerMapper">
-  <resultMap id="BaseResultMap" type="com.softwareone.app.entity.Ledger">
-    <!--@mbg.generated-->
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="money" jdbcType="DOUBLE" property="money" />
-    <result column="date" jdbcType="DATE" property="date" />
-    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
-    <result column="pay" jdbcType="BOOLEAN" property="pay" />
-    <result column="type" jdbcType="OTHER" property="type" />
-    <result column="user_id" jdbcType="INTEGER" property="userId" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    id, money, `date`, remarks, pay, `type`, user_id
-  </sql>
-  <select id="selectByPageAndTime" resultType="com.softwareone.app.entity.Ledger">
-    SELECT <include refid="Base_Column_List"/>
-    FROM ledger
-    <where>
-      <if test="year != null">
-        DATE_FORMAT(date, '%Y') = #{year} AND
-      </if>
-      <if test="month != null">
-        DATE_FORMAT(date, '%m') = #{month} AND
-      </if>
-      <if test="day != null">
-        DATE_FORMAT(date,'%d') = #{day} AND
-      </if>
-      <if test="type != null">
-        type = #{type} AND
-      </if>
-      user_id = #{userId}
-    </where>
-    ORDER BY date DESC
-    <if test="pageLimit.size != null and pageLimit.page != null">
-      <bind name="offset" value="(pageLimit.page - 1) * pageLimit.size"/>
-      LIMIT #{offset}, #{pageLimit.size}
-    </if>
-  </select>
-  <select id="selectCountByTime" resultType="int">
-    SELECT count(1)
-    FROM ledger
-    <where>
-      <if test="year != null">
-        DATE_FORMAT(date, '%Y') = #{year} AND
-      </if>
-      <if test="month != null">
-        DATE_FORMAT(date, '%m') = #{month} AND
-      </if>
-      <if test="day != null">
-        DATE_FORMAT(date,'%d') = #{day} AND
-      </if>
-      <if test="type != null">
-        type = #{type} AND
-      </if>
-      user_id = #{userId}
-    </where>
-  </select>
+    <resultMap id="BaseResultMap" type="com.softwareone.app.entity.Ledger">
+        <!--@mbg.generated-->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="money" jdbcType="DOUBLE" property="money"/>
+        <result column="date" jdbcType="DATE" property="date"/>
+        <result column="remarks" jdbcType="VARCHAR" property="remarks"/>
+        <result column="pay" jdbcType="BOOLEAN" property="pay"/>
+        <result column="type" jdbcType="OTHER" property="type"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, money, `date`, remarks, pay, `type`, user_id
+    </sql>
+    <select id="selectByPageAndTime" resultType="com.softwareone.app.entity.Ledger">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM ledger
+        <where>
+            <if test="year != null">
+                DATE_FORMAT(date, '%Y') = #{year} AND
+            </if>
+            <if test="month != null">
+                DATE_FORMAT(date, '%m') = #{month} AND
+            </if>
+            <if test="day != null">
+                DATE_FORMAT(date,'%d') = #{day} AND
+            </if>
+            <if test="type != null">
+                type = #{type} AND
+            </if>
+            user_id = #{userId}
+        </where>
+        ORDER BY date DESC
+        <if test="pageLimit.size != null and pageLimit.page != null">
+            <bind name="offset" value="(pageLimit.page - 1) * pageLimit.size"/>
+            LIMIT #{offset}, #{pageLimit.size}
+        </if>
+    </select>
+    <select id="selectCountByTime" resultType="int">
+        SELECT count(1)
+        FROM ledger
+        <where>
+            <if test="year != null">
+                DATE_FORMAT(date, '%Y') = #{year} AND
+            </if>
+            <if test="month != null">
+                DATE_FORMAT(date, '%m') = #{month} AND
+            </if>
+            <if test="day != null">
+                DATE_FORMAT(date,'%d') = #{day} AND
+            </if>
+            <if test="type != null">
+                type = #{type} AND
+            </if>
+            user_id = #{userId}
+        </where>
+    </select>
 
-  <select id="selectLedgerPay" resultType="double">
-    SELECT  SUM(money)
-    FROM ledger
-    <where>
-      <if test="year != null">
-        DATE_FORMAT(date, '%Y') = #{year} AND
-      </if>
-      <if test="month != null">
-        DATE_FORMAT(date, '%m') = #{month} AND
-      </if>
-      <if test="day != null">
-        DATE_FORMAT(date,'%d') = #{day} AND
-      </if>
-      <if test="type != null">
-        type = #{type} AND
-      </if>
-      user_id = #{userId} AND
-      pay = #{pay}
-    </where>
-  </select>
-  <update id="updateLedger">
-    UPDATE ledger
-    <set>
-      <if test="date != null">
-        date = #{date},
-      </if>
-      <if test="money != null">
-        money = #{money},
-      </if>
-      <if test="remark != null and remark != ''">
-        remarks = #{remark} ,
-      </if>
-      <if test="type != null">
-        type = #{type},
-      </if>
-      <if test="pay != null">
-        pay = #{pay}
-      </if>
-    </set>
-    WHERE id = #{id}
-  </update>
+    <select id="selectLedgerPay" resultType="double">
+        SELECT SUM(money)
+        FROM ledger
+        <where>
+            <if test="year != null">
+                DATE_FORMAT(date, '%Y') = #{year} AND
+            </if>
+            <if test="month != null">
+                DATE_FORMAT(date, '%m') = #{month} AND
+            </if>
+            <if test="day != null">
+                DATE_FORMAT(date,'%d') = #{day} AND
+            </if>
+            <if test="type != null">
+                type = #{type} AND
+            </if>
+            user_id = #{userId} AND
+            pay = #{pay}
+        </where>
+    </select>
+    <update id="updateLedger">
+        UPDATE ledger
+        <set>
+            <if test="date != null">
+                date = #{date},
+            </if>
+            <if test="money != null">
+                money = #{money},
+            </if>
+            <if test="remark != null and remark != ''">
+                remarks = #{remark} ,
+            </if>
+            <if test="type != null">
+                type = #{type},
+            </if>
+            <if test="pay != null">
+                pay = #{pay}
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
 </mapper>

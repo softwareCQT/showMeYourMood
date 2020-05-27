@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.softwareone.app.bo.UpdateLedgerBo;
 import com.softwareone.app.entity.Ledger;
 import com.softwareone.app.vo.PageLimit;
-import com.softwareone.app.vo.Result;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -20,7 +19,7 @@ public interface LedgerMapper extends BaseMapper<Ledger> {
      * @param userId
      * @return
      */
-    List<Ledger> selectByPageAndTime(PageLimit pageLimit, Integer year, Integer month, Integer day,Integer type, Integer userId);
+    List<Ledger> selectByPageAndTime(PageLimit pageLimit, Integer year, Integer month, Integer day, Integer type, Integer userId);
 
     /***
      * 查询数目
@@ -30,7 +29,7 @@ public interface LedgerMapper extends BaseMapper<Ledger> {
      * @param userId
      * @return
      */
-    int selectCountByTime(Integer year, Integer month, Integer day,Integer type, Integer userId);
+    int selectCountByTime(Integer year, Integer month, Integer day, Integer type, Integer userId);
 
     /***
      *

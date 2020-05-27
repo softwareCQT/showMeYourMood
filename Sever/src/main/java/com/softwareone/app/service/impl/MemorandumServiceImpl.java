@@ -2,11 +2,15 @@ package com.softwareone.app.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.softwareone.app.bo.SaveMemorandumBo;
 import com.softwareone.app.bo.UpdateMemorandumBo;
 import com.softwareone.app.constant.ResultConstant;
 import com.softwareone.app.constant.SystemConstant;
+import com.softwareone.app.entity.Memorandum;
 import com.softwareone.app.handler.AsyncRedisHandler;
+import com.softwareone.app.mapper.MemorandumMapper;
+import com.softwareone.app.service.MemorandumService;
 import com.softwareone.app.vo.PageData;
 import com.softwareone.app.vo.PageLimit;
 import com.softwareone.app.vo.Result;
@@ -18,12 +22,6 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Set;
-
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.softwareone.app.mapper.MemorandumMapper;
-import com.softwareone.app.entity.Memorandum;
-import com.softwareone.app.service.MemorandumService;
 
 /**
  * @author chenqiting
@@ -79,13 +77,13 @@ public class MemorandumServiceImpl extends ServiceImpl<MemorandumMapper, Memoran
     public Result deleteBatchMemorandum(List<Integer> idList, Integer userId) {
         List<Memorandum> list = memorandumMapper.selectBatchIds(idList);
         for (Memorandum memorandum : list) {
-            if (memorandum.getUserId().compareTo(userId) == 0){
+            if (memorandum.getUserId().compareTo(userId) == 0) {
                 zSetOperations.remove(SystemConstant.REMEMBER_KEY, memorandum);
-            }else {
+            } else {
                 idList.remove(memorandum.getId());
             }
         }
-        memorandumMapper.delete(new UpdateWrapper<Memorandum>().in(Memorandum.COL_ID,idList));
+        memorandumMapper.delete(new UpdateWrapper<Memorandum>().in(Memorandum.COL_ID, idList));
         return ResultConstant.OK;
     }
 

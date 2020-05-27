@@ -1,14 +1,12 @@
 package com.softwareone.app.util;
 
-import cn.hutool.extra.spring.SpringUtil;
-import javafx.application.Application;
 import org.springframework.context.ApplicationContext;
 
 /**
  * @author chenqiting
  */
 public class SpringBootUtils {
-    private static ApplicationContext applicationContext =null;
+    private static ApplicationContext applicationContext = null;
 
 
     public static <T> T getBean(Class<T> c) {

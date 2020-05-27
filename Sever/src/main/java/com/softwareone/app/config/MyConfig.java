@@ -8,16 +8,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
@@ -26,30 +23,32 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Configuration
 public class MyConfig {
 
-        @Bean("taskExecutor")
-        public ThreadPoolTaskExecutor taskExecutor(){
-            ThreadPoolTaskExecutor executor  = new ThreadPoolTaskExecutor();
-            executor.setCorePoolSize(5);
-            executor.setMaxPoolSize(20);
-            executor.setQueueCapacity(100);
-            executor.setKeepAliveSeconds(60);
-            executor.setThreadNamePrefix("emailExecutor-");
-            executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
-            executor.setWaitForTasksToCompleteOnShutdown(true);
-            executor.setAwaitTerminationSeconds(60);
-            return executor;
-      }
-      @Bean("task")
-      public ThreadPoolTaskScheduler scheduledThreadPoolExecutor(){
-          ThreadPoolTaskScheduler threadPoolTaskExecutor = new ThreadPoolTaskScheduler();
-          threadPoolTaskExecutor.setPoolSize(5);
-          threadPoolTaskExecutor.setThreadNamePrefix("陈起廷的延时队列");
-          return threadPoolTaskExecutor;
-      }
-      @Bean
-      public PasswordEncoder passwordEncoder(){
-          return new BCryptPasswordEncoder();
-      }
+    @Bean("taskExecutor")
+    public ThreadPoolTaskExecutor taskExecutor() {
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        executor.setCorePoolSize(5);
+        executor.setMaxPoolSize(20);
+        executor.setQueueCapacity(100);
+        executor.setKeepAliveSeconds(60);
+        executor.setThreadNamePrefix("emailExecutor-");
+        executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
+        executor.setWaitForTasksToCompleteOnShutdown(true);
+        executor.setAwaitTerminationSeconds(60);
+        return executor;
+    }
+
+    @Bean("task")
+    public ThreadPoolTaskScheduler scheduledThreadPoolExecutor() {
+        ThreadPoolTaskScheduler threadPoolTaskExecutor = new ThreadPoolTaskScheduler();
+        threadPoolTaskExecutor.setPoolSize(5);
+        threadPoolTaskExecutor.setThreadNamePrefix("陈起廷的延时队列");
+        return threadPoolTaskExecutor;
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {

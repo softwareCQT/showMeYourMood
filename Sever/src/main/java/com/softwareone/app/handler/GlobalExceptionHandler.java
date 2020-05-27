@@ -25,7 +25,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         StringBuilder stringBuilder = new StringBuilder("参数错误：");
 
         stringBuilder.append(ex.getMessage());
-        return new ResponseEntity<>(new Result<>(400,stringBuilder.toString()), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new Result<>(400, stringBuilder.toString()), HttpStatus.BAD_REQUEST);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         StringBuilder stringBuilder = new StringBuilder("参数错误：");
         ex.getBindingResult().getAllErrors().forEach(v -> stringBuilder.append(v.getDefaultMessage()).append(","));
 
-        return new ResponseEntity<>(new Result<>(400,stringBuilder.toString()), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new Result<>(400, stringBuilder.toString()), HttpStatus.BAD_REQUEST);
     }
 
     @Override
@@ -41,10 +41,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         StringBuilder stringBuilder = new StringBuilder("参数错误：");
         ex.getAllErrors().forEach(v -> stringBuilder.append(v.getDefaultMessage()).append(","));
 
-        return new ResponseEntity<>(new Result<>(400,stringBuilder.toString()), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new Result<>(400, stringBuilder.toString()), HttpStatus.BAD_REQUEST);
     }
+
     @ExceptionHandler(value = {ConstraintViolationException.class})
-    public ResponseEntity<Object> handleViolationException(ConstraintViolationException ex){
-       return new ResponseEntity<>(new Result<>(400, ex.getMessage()), HttpStatus.BAD_REQUEST) ;
+    public ResponseEntity<Object> handleViolationException(ConstraintViolationException ex) {
+        return new ResponseEntity<>(new Result<>(400, ex.getMessage()), HttpStatus.BAD_REQUEST);
     }
 }

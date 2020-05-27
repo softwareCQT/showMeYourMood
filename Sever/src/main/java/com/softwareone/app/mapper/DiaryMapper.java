@@ -30,7 +30,7 @@ public interface DiaryMapper extends BaseMapper<Diary> {
      * @param month 月
      * @param day 日
      */
-      List<Diary> selectDiaryByDateAndPage(Integer userId, PageLimit pageLimit, Integer year, Integer month, Integer day);
+    List<Diary> selectDiaryByDateAndPage(Integer userId, PageLimit pageLimit, Integer year, Integer month, Integer day);
 
     /***
      *获取条数

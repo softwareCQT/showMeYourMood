@@ -1,12 +1,12 @@
 package com.softwareone.app.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.softwareone.app.bo.UpdateLedgerBo;
 import com.softwareone.app.entity.Ledger;
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.softwareone.app.vo.PageLimit;
 import com.softwareone.app.vo.Result;
 
-public interface LedgerService extends IService<Ledger>{
+public interface LedgerService extends IService<Ledger> {
 
     /***
      * 保存账本

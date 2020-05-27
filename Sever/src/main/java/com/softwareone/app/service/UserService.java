@@ -1,17 +1,14 @@
 package com.softwareone.app.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.softwareone.app.bo.UserLoginBo;
 import com.softwareone.app.entity.User;
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.softwareone.app.vo.Result;
-
-import javax.validation.Valid;
-import javax.validation.constraints.Email;
 
 /***
  * @author chenqiting
  */
-public interface UserService extends IService<User>{
+public interface UserService extends IService<User> {
     /***
      * 登录
      * @param userLoginBo 账号和密码

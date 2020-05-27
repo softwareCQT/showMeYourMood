@@ -35,26 +35,27 @@ public class LedgerController {
                             @RequestParam(value = "year", required = false) @Valid @Min(0) Integer year,
                             @RequestParam(value = "month", required = false) @Valid @Min(1) @Max(12) Integer month,
                             @RequestParam(value = "day", required = false) @Valid @Min(1) @Max(31) Integer day,
-                            @RequestParam(value = "type",required = false) @Valid @Min(1) @Max(4) Integer type,
+                            @RequestParam(value = "type", required = false) @Valid @Min(1) @Max(4) Integer type,
                             UsernamePasswordAuthenticationToken token) {
-        return ledgerService.getLedgerByPageAndTime(new PageLimit(page, size), year, month, day,type, (Integer)token.getPrincipal());
+        return ledgerService.getLedgerByPageAndTime(new PageLimit(page, size), year, month, day, type, (Integer) token.getPrincipal());
     }
+
     @GetMapping("/api/ledger/sum")
     public Result sumLedgerOnTimeOrAll(UsernamePasswordAuthenticationToken token,
-                                        @RequestParam(value = "year", required = false) @Valid @Min(0) Integer year,
+                                       @RequestParam(value = "year", required = false) @Valid @Min(0) Integer year,
                                        @RequestParam(value = "month", required = false) @Valid @Min(1) @Max(12) Integer month,
                                        @RequestParam(value = "day", required = false) @Valid @Min(1) @Max(31) Integer day,
-                                       @RequestParam(value = "type",required = false) @Valid @Min(1) @Max(4) Integer type){
-        return ledgerService.sumLedgerOnTimeOrAll((Integer)token.getPrincipal(),year, month, day, type);
+                                       @RequestParam(value = "type", required = false) @Valid @Min(1) @Max(4) Integer type) {
+        return ledgerService.sumLedgerOnTimeOrAll((Integer) token.getPrincipal(), year, month, day, type);
     }
 
     @PostMapping("/api/ledger/delete/{id}")
-    public Result deleteLedger(@PathVariable("id")Integer id, UsernamePasswordAuthenticationToken token) {
+    public Result deleteLedger(@PathVariable("id") Integer id, UsernamePasswordAuthenticationToken token) {
         return ledgerService.deleteLedger(id, (Integer) token.getPrincipal());
     }
 
     @PostMapping("/api/ledger/update")
     public Result updateLedger(@RequestBody @Valid UpdateLedgerBo updateLedgerBo, UsernamePasswordAuthenticationToken token) {
-        return ledgerService.updateLedger(updateLedgerBo, (Integer)token.getPrincipal());
+        return ledgerService.updateLedger(updateLedgerBo, (Integer) token.getPrincipal());
     }
 }
