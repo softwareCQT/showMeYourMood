@@ -16,7 +16,9 @@ struct MenuView: View {
                 AppWindow!.rootViewController = UIHostingController(rootView: NoteListView().environmentObject(NoteStore()))
             })
             MenuRow(title: "账本管理", icon: "cart", btnClickBlock: {
-                AppWindow!.rootViewController = UIHostingController(rootView: AccountView())
+                AppWindow!.rootViewController = UIHostingController(rootView: AccountListView()
+                    .environmentObject(AccountStore())
+                    .environmentObject(AccountOutIn()))
             })
             MenuRow(title: "备忘录", icon: "equal.square", btnClickBlock: {
                 AppWindow!.rootViewController = UIHostingController(rootView: MemorandumView().environmentObject(MemoStore()))

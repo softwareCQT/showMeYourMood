@@ -37,7 +37,7 @@ struct ForgetView: View {
                         
                         HStack {
                             Text("密码")
-                            UserSecureField(loginInfo: self.$userPwd,height: 40, placeholder: "请输入密码")
+                            UserSecureField(loginInfo: self.$userPwd,height: 40, placeholder: "请输入新密码")
                         }
                         
                         SendVerifyCodeView(verifyCode: self.$verifyCode, isSending: self.$isSending, waitingTime: self.$waitingTime, userMail: self.userMail, request: AF.request(baseURL + passwordCodeURL, parameters: ["email" : self.userMail]))
@@ -53,8 +53,8 @@ struct ForgetView: View {
                                    encoder: JSONParameterEncoder.default),
                                   
                                   preRequest: AF.request(baseURL + validURL, parameters: ["email": self.userMail, "code": self.verifyCode]),
-                                  successMsg: "注册成功！",
-                                  title: "注册",
+                                  successMsg: "密码修改成功！",
+                                  title: "确定",
                                   vertifyBlock: {
                                     if self.verifyCode == "" { return (false, "验证码不可为空！")}
                                     if  self.userPwd == "" || self.userMail == "" { return (false, "输入不可为空！")}

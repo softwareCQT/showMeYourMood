@@ -62,7 +62,7 @@ struct MemorandumView: View {
                                         .font(.subheadline)
                                         .foregroundColor(.secondary)
                                 }
-                            }.padding(.vertical)
+                            }.padding(.vertical, 5)
                         }
                     }.onDelete { index in
                         for i in index {
@@ -119,11 +119,6 @@ struct MemorandumView: View {
             MenuView()
                 .offset(x: 0, y: showProfile ? 0 : UIScreen.main.bounds.height)
                 .animation(.spring())
-        }.onAppear {
-            self.memoStore.load({ _ in
-                
-            })
-            
         }
     }
 }

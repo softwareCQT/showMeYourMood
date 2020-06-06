@@ -20,7 +20,6 @@ struct AddMemoView: View {
     
     func save() {
         let date = date2String1(self.date)
-        print(date)
         let dict: Dictionary<String, Any> = ["memorandum": ["content": memo.content, "createTime": memo.createTime], "date": date ]
         
         var request = URLRequest(url: URL(string: baseURL + memoSaveURL)! )
@@ -41,47 +40,53 @@ struct AddMemoView: View {
             self.isPushing.toggle()
             if status {
                 self.dismiss.toggle()
+                //                sendNotice(date: self.date, body: self.memo.content)
             }else {
                 //上传失败
                 self.error.toggle()
             }
-
+            
         }
     }
     
     var body: some View {
-        LoadingView(isShowing: $isPushing) {
-            
+        //        LoadingView(isShowing: $isPushing) {
+        
+        VStack {
             VStack {
-                VStack {
-                    HStack {
-                        Spacer()
-                        Button(action: {
-                            // 上传
-                            self.isPushing.toggle()
-                            self.save()
-                        }, label: {
-                            Text("保存")
-                        }).alert(isPresented: self.$error, content: {
-                            Alert(title: Text("上传失败！"))
-                        }).padding()
-                            .padding(.trailing, 10)
-                            .padding(.top, 10)
-                        
-                    }
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        // 上传
+                        self.isPushing.toggle()
+                        self.save()
+                    }, label: {
+                        Text("保存")
+                    }).alert(isPresented: self.$error, content: {
+                        Alert(title: Text("上传失败！"))
+                    }).padding()
+                        .padding(.trailing, 10)
+                        .padding(.top, 10)
                     
-                }.background(BlurView(style: .prominent))
-                
-                VStack {
-                    TextView1(text: self.$memo.content).frame(numLines: 25)
-                    
-                    
-                    DatePicker(selection: .constant(Date()), label: { Text("提醒日期") })
                 }
                 
-                Divider()
+            }.background(BlurView(style: .prominent))
+            
+            VStack {
+                HStack {
+                    Text("备忘录内容:")
+                        .foregroundColor(.secondary)
+                    Spacer()
+                }
+                TextView1(text: self.$memo.content).frame(numLines: 20)
                 
-            }
+                Divider()
+                DatePicker(selection: self.$date, label: { Text("提醒日期") })
+            }.padding()
+            
+            Spacer()
+            
         }
     }
+    //    }
 }

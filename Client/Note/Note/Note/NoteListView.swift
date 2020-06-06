@@ -119,9 +119,7 @@ struct NoteListView: View {
                 .offset(x: 0, y: showProfile ? 0 : UIScreen.main.bounds.height)
                 .animation(.spring())
         }.onAppear {
-            self.noteStore.load({ _ in
-                
-            })
+            self.noteStore.load({ _ in })
         }
     }
 }

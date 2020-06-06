@@ -16,7 +16,8 @@ struct AddNoteView: View {
     @State var error: Bool = false
     @State var showDraw = false
     @State var leave = false
-    
+    @State var message : String = "上传失败"
+     
     func save() {
         AF.request(baseURL + noteSaveURL, method: .post, parameters: ["diaryName": note.diaryName, "content": note.content, "date": note.date, "emoji": note.emoji.emoji2String(), "weather": note.weather.weather2String()], encoder: JSONParameterEncoder.default, headers: ["Authorization": Authorization!]).responseJSON { response in
             // 上传中
@@ -25,8 +26,10 @@ struct AddNoteView: View {
                 if let code = dict["code"] as? Int {
                     status = (code == 200)
                 }
+                self.message = dict["msg"] as? String ?? "上传失败"
             }
-            self.isPushing.toggle()
+
+//            self.isPushing.toggle()
             if status {
                 let fileManger = FileManager.default
                 do{
@@ -45,7 +48,7 @@ struct AddNoteView: View {
     }
     
     var body: some View {
-        LoadingView(isShowing: $isPushing) {
+//        LoadingView(isShowing: $isPushing) {
             
             VStack {
                 VStack {
@@ -53,12 +56,12 @@ struct AddNoteView: View {
                         Spacer()
                         Button(action: {
                             // 上传
-                            self.isPushing.toggle()
+//                            self.isPushing.toggle()
                             self.save()
                         }, label: {
                             Text("保存")
                         }).alert(isPresented: self.$error, content: {
-                            Alert(title: Text("上传失败！"))
+                            Alert(title: Text(message))
                         }).padding()
                             .padding(.trailing, 10)
                             .padding(.top, 10)
@@ -110,9 +113,8 @@ struct AddNoteView: View {
                             }
                         }
                     }.padding()
-                    
                 }
-                
+
                 Divider()
                 VStack {
                     HStack {
@@ -149,5 +151,5 @@ struct AddNoteView: View {
                 Spacer()
             }
         }
-    }
+//    }
 }

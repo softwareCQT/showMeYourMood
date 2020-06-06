@@ -25,7 +25,7 @@ struct MemoView: View {
     
     func save() {
         let dict: Dictionary<String, Any> = ["id": memo.id, "content": memo.content]
-
+        
         var request = URLRequest(url: URL(string: baseURL + memoUpdateURL)! )
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -34,13 +34,13 @@ struct MemoView: View {
         request.headers = ["Authorization":Authorization!]
         AF.request(request).responseJSON { (response) in
             var status = false
-
+            
             if let dict = response.value as? Dictionary<String, Any> {
                 if let code = dict["code"] as? Int {
                     status = (code == 200)
                 }
             }
-
+            
             if status {
                 self.memoStore.memos[self.noteIndex()!].content = self.memo.content
                 self.message = "保存成功"
@@ -53,16 +53,21 @@ struct MemoView: View {
     
     var body: some View {
         List {
+            VStack {
+                HStack {
+                    Text("备忘录内容:")
+                        .foregroundColor(.secondary)
+                    Spacer()
+                }
                 TextView1(text: $memo.content).frame(numLines: 25)
-                
-
+            }
         }.navigationBarTitle(memo.createTime)
             .navigationBarItems(
                 
                 trailing: Button(action: {
                     self.save()
                 }, label: { Text("保存") }).alert(isPresented: self.$showAlert, content: { () -> Alert in
-                     Alert(title: Text(message))
+                    Alert(title: Text(message))
                 })
         ).onDisappear(perform: {
                 self.pushed.toggle()
