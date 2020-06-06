@@ -9,7 +9,7 @@ public interface UserMapper extends BaseMapper<User> {
     /***
      * 找用户的email
      * @param email 邮箱地址
-     * @return  用户
+     * @return 用户
      */
     User selectByEmail(String email);
 }

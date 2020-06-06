@@ -1,76 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.softwareone.app.mapper.DiaryMapper">
-  <resultMap id="BaseResultMap" type="com.softwareone.app.entity.Diary">
-    <!--@mbg.generated-->
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="diary_name" jdbcType="VARCHAR" property="diaryName" />
-    <result column="content" jdbcType="LONGVARCHAR" property="content" />
-    <result column="date" jdbcType="DATE" property="date" />
-    <result column="emoji" jdbcType="VARCHAR" property="emoji" />
-    <result column="weather" jdbcType="VARCHAR" property="weather" />
-    <result column="user_id" jdbcType="INTEGER" property="userId" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    id, diary_name, content, `date`, emoji, weather, user_id
-  </sql>
-  <update id="updateByType">
-    UPDATE diary
-    <set>
-      <if test="content != null and content != ''">
-        content = #{content} ,
-      </if>
-      <if test="emoji != null and emoji != ''">
-        emoji = #{emoji},
-      </if>
-      <if test="date != null">
-        date = #{date},
-      </if>
-      <if test="weather != null and weather != ''">
-        weather = #{weather}
-      </if>
-    </set>
-    WHERE id = #{id}
-  </update>
+    <resultMap id="BaseResultMap" type="com.softwareone.app.entity.Diary">
+        <!--@mbg.generated-->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="diary_name" jdbcType="VARCHAR" property="diaryName"/>
+        <result column="content" jdbcType="LONGVARCHAR" property="content"/>
+        <result column="date" jdbcType="DATE" property="date"/>
+        <result column="emoji" jdbcType="VARCHAR" property="emoji"/>
+        <result column="weather" jdbcType="VARCHAR" property="weather"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, diary_name, content, `date`, emoji, weather, user_id
+    </sql>
+    <update id="updateByType">
+        UPDATE diary
+        <set>
+            <if test="diary.content != null and diary.content != ''">
+                content = #{diary.content} ,
+            </if>
+            <if test="diary.emoji != null and diary.emoji != ''">
+                emoji = #{diary.emoji},
+            </if>
+            <if test="diary.date != null">
+                date = #{diary.date},
+            </if>
+            <if test="diary.weather != null and diary.weather != ''">
+                weather = #{diary.weather}
+            </if>
+        </set>
+        WHERE id = #{diary.id} AND user_id = #{userId}
+    </update>
 
-  <select id="selectDiaryByDateAndPage" resultType="com.softwareone.app.entity.Diary">
-    SELECT <include refid="Base_Column_List"/>
-    FROM diary
-    WHERE user_id = #{userId}
-    <if test="!(year == null and month == null and day == null) ">
-      HAVING
-          <if test="year != null">
-            DATE_FORMAT(date, '%Y') = #{year} AND
-          </if>
-          <if test="month != null">
-            DATE_FORMAT(date, '%m') = #{month} AND
-          </if>
-          <if test="day != null">
-            DATE_FORMAT(date,'%d') = #{day}
-          </if>
-    </if>
-    ORDER BY date DESC
-    <if test="pageLimit.size != null and pageLimit.page != null">
-        <bind name="offset" value="(pageLimit.page - 1) * pageLimit.size"/>
-        LIMIT #{offset}, #{pageLimit.size}
-    </if>
-  </select>
-  <select id="selectCountByDate" resultType="int">
-    SELECT count(1)
-    FROM diary
-    WHERE user_id = #{userId}
-    <if test="!(year == null and month == null and day == null) ">
-      HAVING
-      <if test="year != null">
-        DATE_FORMAT(date, '%Y') = #{year} AND
-      </if>
-      <if test="month != null">
-        DATE_FORMAT(date, '%m') = #{month} AND
-      </if>
-      <if test="day != null">
-        DATE_FORMAT(date,'%d') = #{day}
-      </if>
-    </if>
-  </select>
+    <select id="selectDiaryByDateAndPage" resultType="com.softwareone.app.entity.Diary">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM diary
+        <where>
+            <if test="year != null">
+                DATE_FORMAT(date, '%Y') = #{year} AND
+            </if>
+            <if test="month != null">
+                DATE_FORMAT(date, '%m') = #{month} AND
+            </if>
+            <if test="day != null">
+                DATE_FORMAT(date,'%d') = #{day} AND
+            </if>
+            user_id = #{userId}
+        </where>
+        ORDER BY date DESC
+        <if test="pageLimit.size != null and pageLimit.page != null">
+            <bind name="offset" value="(pageLimit.page - 1) * pageLimit.size"/>
+            LIMIT #{offset}, #{pageLimit.size}
+        </if>
+    </select>
+    <select id="selectCountByDate" resultType="int">
+        SELECT count(1)
+        FROM diary
+        <where>
+            <if test="year != null">
+                DATE_FORMAT(date, '%Y') = #{year} AND
+            </if>
+            <if test="month != null">
+                DATE_FORMAT(date, '%m') = #{month} AND
+            </if>
+            <if test="day != null">
+                DATE_FORMAT(date,'%d') = #{day} AND
+            </if>
+            user_id = #{userId}
+        </where>
+    </select>
 </mapper>

@@ -7,56 +7,54 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-/***
- * @author chenqiting
- */
 @Data
-@TableName(value = "diary")
-public class Diary {
+@TableName(value = "memory.ledger")
+public class Ledger {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @TableField(value = "diary_name")
+    @TableField(value = "money")
     @NotNull
-    private String diaryName;
-
-    @TableField(value = "content")
-    @NotNull
-    private String content;
+    @Min(value = 0)
+    private Double money;
 
     @TableField(value = "date")
-    @NotNull
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date date;
 
-    /**
-     * 用户的心情
-     */
-    @TableField(value = "emoji")
-    @NotNull
-    private String emoji;
+    @TableField(value = "remarks")
+    @NotNull(message = "简单说明不能空，可默认传账本信息进来")
+    private String remarks;
 
-    @TableField(value = "weather")
+    /**
+     * 0是收入，1是支出
+     */
+    @TableField(value = "pay")
     @NotNull
-    private String weather;
+    private Boolean pay;
+
+    @TableField(value = "type")
+    @NotNull
+    private Object type;
 
     @TableField(value = "user_id")
     private Integer userId;
 
     public static final String COL_ID = "id";
 
-    public static final String COL_DIARY_NAME = "diary_name";
-
-    public static final String COL_CONTENT = "content";
+    public static final String COL_MONEY = "money";
 
     public static final String COL_DATE = "date";
 
-    public static final String COL_EMOJI = "emoji";
+    public static final String COL_REMARKS = "remarks";
 
-    public static final String COL_WEATHER = "weather";
+    public static final String COL_PAY = "pay";
+
+    public static final String COL_TYPE = "type";
 
     public static final String COL_USER_ID = "user_id";
 }

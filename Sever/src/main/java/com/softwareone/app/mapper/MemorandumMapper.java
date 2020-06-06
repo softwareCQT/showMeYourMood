@@ -6,7 +6,6 @@ import com.softwareone.app.entity.Memorandum;
 import com.softwareone.app.vo.PageLimit;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.jmx.export.annotation.ManagedOperationParameter;
 
 import java.util.List;
 

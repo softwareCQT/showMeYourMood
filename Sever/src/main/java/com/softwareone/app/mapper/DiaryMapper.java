@@ -17,9 +17,10 @@ public interface DiaryMapper extends BaseMapper<Diary> {
     /***
      * 更新
      * @param diary 日记
+     * @param userId 标识
      * @return 更新条数
      */
-    int updateByType(UpdateDiaryBo diary);
+    int updateByType(UpdateDiaryBo diary, Integer userId);
 
     /***
      *根据年月日获取并分页
@@ -29,7 +30,7 @@ public interface DiaryMapper extends BaseMapper<Diary> {
      * @param month 月
      * @param day 日
      */
-      List<Diary> selectDiaryByDateAndPage(Integer userId, PageLimit pageLimit, Integer year, Integer month, Integer day);
+    List<Diary> selectDiaryByDateAndPage(Integer userId, PageLimit pageLimit, Integer year, Integer month, Integer day);
 
     /***
      *获取条数

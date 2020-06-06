@@ -1,8 +1,9 @@
 package com.softwareone.app.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.softwareone.app.bo.SaveMemorandumBo;
 import com.softwareone.app.bo.UpdateMemorandumBo;
 import com.softwareone.app.entity.Memorandum;
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.softwareone.app.vo.PageLimit;
 import com.softwareone.app.vo.Result;
 
@@ -24,24 +25,26 @@ public interface MemorandumService extends IService<Memorandum> {
     /***
      * 根据id删除
      * @param id id
+     * @param userId
      * @return 删除是否成功
      */
-    Result deleteMemorandumById(int id);
+    Result deleteMemorandumById(int id, Integer userId);
 
     /***
      * 存储备忘录
-     * @param memorandum 备忘录的信息
+     * @param saveMemorandumBo 备忘录的信息和需要通知的时间
      * @param userId 用户id
      * @return 存储是否成功
      */
-    Result saveMemorandum(Memorandum memorandum, Integer userId);
+    Result saveMemorandum(SaveMemorandumBo saveMemorandumBo, Integer userId);
 
     /***
      * 批量删除
      * @param idList id的集合
+     * @param userId
      * @return 数据
      */
-    Result deleteBatchMemorandum(List<Integer> idList);
+    Result deleteBatchMemorandum(List<Integer> idList, Integer userId);
 
     /***
      * 更新备忘录

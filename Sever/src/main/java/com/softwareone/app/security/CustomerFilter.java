@@ -15,7 +15,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
 import java.util.Objects;
 
 /**
@@ -26,7 +25,7 @@ public class CustomerFilter extends BasicAuthenticationFilter {
     private JwtUtil jwtUtil;
 
 
-    public CustomerFilter(AuthenticationManager authenticationManager,JwtUtil jwtUtil) {
+    public CustomerFilter(AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
         super(authenticationManager);
         this.jwtUtil = jwtUtil;
     }
@@ -46,19 +45,18 @@ public class CustomerFilter extends BasicAuthenticationFilter {
             Integer userId = jwtUtil.getUserId(jwt);
 
             if (Objects.nonNull(uuid)) {
-                    //对全部字符串要加上前缀
-                    UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
-                            new UsernamePasswordAuthenticationToken(userId, null, null);
-                    // 设置具体的detail与否根据功能需求可以自定义设置details,即后台自定义传导数据
-                    usernamePasswordAuthenticationToken.setDetails(userId);
-                    SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-                    chain.doFilter(request, response);
-                }
-        }else {
+                //对全部字符串要加上前缀
+                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
+                        new UsernamePasswordAuthenticationToken(userId, null, null);
+                // 设置具体的detail与否根据功能需求可以自定义设置details,即后台自定义传导数据
+                usernamePasswordAuthenticationToken.setDetails(userId);
+                SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+                chain.doFilter(request, response);
+            }
+        } else {
             ErrorHandlerUtil.printError(response, ResultConstant.LOGIN_ERROR, 401);
         }
     }
-
 
 
 }

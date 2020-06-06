@@ -10,12 +10,18 @@ import java.util.Date;
  * @author chenqiting
  */
 @Data
-public class UpdateDiaryBo {
+public class UpdateLedgerBo {
     @NotNull
     private Integer id;
-    private String content;
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+
+    private String remark;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date date;
-    private String weather;
-    private String emoji;
+
+    private Double money;
+
+    private Integer type;
+
+    private Boolean pay;
 }
